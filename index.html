@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자료구조 과제 2 - GoT 가문 상속 구조 및 다형성 시각화</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(147, 51, 234, 0.7); }
+            50% { transform: scale(1.03); box-shadow: 0 0 15px 5px rgba(147, 51, 234, 0.5); }
+        }
+        .active-card {
+            animation: pulse-glow 1.5s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen font-sans flex flex-col justify-between">
+
+    <header class="bg-slate-800 border-b border-slate-700 p-6 text-center shadow-md">
+        <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r bg-indigo-400 to-purple-400">
+            OOP 설계 기반 인터랙티브 웹앱
+        </h1>
+        <p class="text-slate-400 mt-2 text-sm">과제 1 가문(House) 상속 구조 & 다형성(Polymorphism) 시각화</p>
+    </header>
+
+    <main class="max-w-5xl w-full mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-8 items-start my-auto">
+        
+        <div class="md:col-span-2 bg-slate-800/60 border border-slate-700/50 rounded-2xl p-6 shadow-xl">
+            <h2 class="text-xl font-bold mb-6 flex items-center gap-2 text-indigo-300">
+                <span>🌿</span> 가문 상속 계층도 (UML 구조)
+            </h2>
+            
+            <div class="flex flex-col items-center gap-8 relative">
+                <div class="bg-slate-700 border-2 border-slate-500 rounded-xl p-4 w-48 text-center shadow-lg relative">
+                    <div class="text-xs uppercase font-semibold text-slate-400 tracking-wider mb-1">Abstract Base</div>
+                    <div class="text-lg font-bold text-slate-200">Character</div>
+                    <div class="text-[11px] text-indigo-300 font-mono mt-1 border-t border-slate-600 pt-1">attack()<br>unique_skill()</div>
+                </div>
+
+                <div class="w-full flex justify-around max-w-md border-t-2 border-dashed border-slate-600 h-6 relative -mt-2">
+                    <div class="absolute top-0 left-1/6 w-0.5 h-6 border-l-2 border-dashed border-slate-600"></div>
+                    <div class="absolute top-0 left-1/2 w-0.5 h-6 border-l-2 border-dashed border-slate-600"></div>
+                    <div class="absolute top-0 right-1/6 w-0.5 h-6 border-l-2 border-dashed border-slate-600"></div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4 w-full -mt-2">
+                    
+                    <button onclick="triggerPolymorphism('Stark')" id="card-Stark" 
+                        class="bg-slate-800 border-2 border-blue-500/50 hover:border-blue-400 rounded-xl p-4 text-center transition-all duration-300 shadow-md group cursor-pointer focus:outline-none">
+                        <div class="text-2xl mb-1 group-hover:scale-125 transition-transform">🐺</div>
+                        <div class="text-md font-bold text-blue-300">House Stark</div>
+                        <div class="text-xs text-slate-400 mt-1 font-mono italic">"Winter is Coming"</div>
+                        <div class="text-[10px] bg-blue-950 text-blue-400 rounded py-0.5 px-1.5 mt-2 inline-block font-mono">Overridden</div>
+                    </button>
+
+                    <button onclick="triggerPolymorphism('Lannister')" id="card-Lannister" 
+                        class="bg-slate-800 border-2 border-amber-500/50 hover:border-amber-400 rounded-xl p-4 text-center transition-all duration-300 shadow-md group cursor-pointer focus:outline-none">
+                        <div class="text-2xl mb-1 group-hover:scale-125 transition-transform">🦁</div>
+                        <div class="text-md font-bold text-amber-300">House Lannister</div>
+                        <div class="text-xs text-slate-400 mt-1 font-mono italic">"Hear Me Roar"</div>
+                        <div class="text-[10px] bg-amber-950 text-amber-400 rounded py-0.5 px-1.5 mt-2 inline-block font-mono">Overridden</div>
+                    </button>
+
+                    <button onclick="triggerPolymorphism('Targaryen')" id="card-Targaryen" 
+                        class="bg-slate-800 border-2 border-red-500/50 hover:border-red-400 rounded-xl p-4 text-center transition-all duration-300 shadow-md group cursor-pointer focus:outline-none">
+                        <div class="text-2xl mb-1 group-hover:scale-125 transition-transform">🐉</div>
+                        <div class="text-md font-bold text-red-300">House Targaryen</div>
+                        <div class="text-xs text-slate-400 mt-1 font-mono italic">"Fire and Blood"</div>
+                        <div class="text-[10px] bg-red-950 text-red-400 rounded py-0.5 px-1.5 mt-2 inline-block font-mono">Overridden</div>
+                    </button>
+
+                </div>
+            </div>
+            <div class="text-center text-xs text-slate-500 mt-6">💡 각 가문(자식 클래스) 노드를 클릭하면 오버라이딩된 다형성 메서드가 호출됩니다.</div>
+        </div>
+
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-xl flex flex-col h-[380px]">
+            <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-purple-300">
+                <span>⚡</span> Polymorphism Monitor
+            </h2>
+            
+            <div id="monitor-view" class="bg-slate-950 rounded-xl p-4 flex-1 border border-slate-800 flex flex-col justify-center items-center text-center transition-all duration-300">
+                <div id="monitor-icon" class="text-4xl mb-2 text-slate-600">⚔️</div>
+                <div id="monitor-title" class="text-md font-semibold text-slate-400">대기 중...</div>
+                <div id="monitor-desc" class="text-xs text-slate-500 mt-1">상속 계층도의 가문을 선택하세요.</div>
+            </div>
+
+            <div class="mt-4">
+                <div class="text-xs font-semibold uppercase text-slate-500 tracking-wider mb-1">Execution Log</div>
+                <div id="console-log" class="bg-black/40 border border-slate-900 rounded-lg p-2 font-mono text-[11px] text-green-400 h-20 overflow-y-auto">
+                    > 시스템이 정상적으로 준비되었습니다.<br>
+                    > 가문의 unique_skill() 다형성 검증 대기 중...
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-slate-900 border-t border-slate-800 p-4 text-center text-xs text-slate-500">
+        컴퓨터학부 자료구조 과제 2 | 설계부터 배포까지 풀사이클 (Full-Cycle)
+    </footer>
+
+    <script>
+        // 가문별 고유 스킬 및 다형성 데이터 구조 (과제 1 객체 데이터 매핑)
+        const houseData = {
+            Stark: {
+                icon: "🐺",
+                title: "House Stark 인스턴스 호출",
+                skillName: "Winter Is Coming (다형성 오버라이딩)",
+                damage: "데미지: 45 (확정 광역 물리 피해)",
+                effect: "❄️ 다이어울프를 소환해 전장에 한기를 퍼뜨리고 적을 빙결시킵니다!",
+                logColor: "text-blue-400"
+            },
+            Lannister: {
+                icon: "🦁",
+                title: "House Lannister 인스턴스 호출",
+                skillName: "Hear Me Roar (다형성 오버라이딩)",
+                damage: "데미지: 20 ~ 70 (금화 투척 확률형 치명타)",
+                effect: "💰 막강한 자금력으로 용병을 고용하여 적에게 치명적인 일격을 가합니다!",
+                logColor: "text-amber-400"
+            },
+            Targaryen: {
+                icon: "🐉",
+                title: "House Targaryen 인스턴스 호출",
+                skillName: "Fire and Blood (다형성 오버라이딩)",
+                damage: "데미지: 99 (드래곤 브레스 고정 마법 피해)",
+                effect: "🔥 세 마리의 드래곤을 출격시켜 전장의 모든 적을 순식간에 불태웁니다!",
+                logColor: "text-red-400"
+            }
+        };
+
+        function triggerPolymorphism(house) {
+            const data = houseData[house];
+            
+            // 1. 모든 카드 활성화 효과(Glow) 초기화 및 선택 카드 강조
+            ['Stark', 'Lannister', 'Targaryen'].forEach(h => {
+                document.getElementById(`card-${h}`).classList.remove('active-card', 'border-purple-500');
+            });
+            const activeCard = document.getElementById(`card-${house}`);
+            activeCard.classList.add('active-card');
+
+            // 2. 우측 모니터 뷰어 동적(Dynamic) 업데이트
+            const view = document.getElementById('monitor-view');
+            
+            // 부드러운 전환 효과를 위해 반짝임 처리
+            view.style.opacity = '0.5';
+            
+            setTimeout(() => {
+                document.getElementById('monitor-icon').innerText = data.icon;
+                document.getElementById('monitor-title').innerHTML = `<span class="${data.logColor} font-bold">${data.title}</span>`;
+                document.getElementById('monitor-desc').innerHTML = `
+                    <div class="mt-2 font-mono font-bold text-purple-300 text-sm">[메서드] ${data.skillName}</div>
+                    <div class="text-rose-400 font-bold mt-1 text-xs">${data.damage}</div>
+                    <div class="text-slate-300 text-[11px] mt-2 px-2 leading-relaxed">${data.effect}</div>
+                `;
+                view.style.opacity = '1';
+            }, 150);
+
+            // 3. 실행 로그 실시간 기록 업데이트
+            const consoleLog = document.getElementById('console-log');
+            const timestamp = new Date().toLocaleTimeString();
+            consoleLog.innerHTML += `<br><span class="${data.logColor}">[${timestamp}] obj = new ${house}(); obj.unique_skill(); 호출 성공!</span>`;
+            
+            // 스크롤 최하단으로 이동
+            consoleLog.scrollTop = consoleLog.scrollHeight;
+        }
+    </script>
+</body>
+</html>
