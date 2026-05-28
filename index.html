@@ -3,301 +3,304 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>웨스테로스 대가문 계층도 및 가계도 시뮬레이터</title>
+    <title>웨스테로스 세력 및 봉신 가문 계층도</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         @keyframes pulse-glow {
             0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.7); }
-            50% { transform: scale(1.02); box-shadow: 0 0 20px 8px rgba(217, 119, 6, 0.4); }
+            50% { transform: scale(1.01); box-shadow: 0 0 15px 5px rgba(217, 119, 6, 0.4); }
         }
         .active-card {
             animation: pulse-glow 1.5s infinite ease-in-out;
             background-color: rgb(15, 23, 42) !important;
             border-color: rgb(217, 119, 6) !important;
         }
-        /* 가계도 트리 연결선용 스타일 */
-        .tree-line::before {
-            content: '';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            width: 2px;
-            height: 12px;
-            background-color: #475569;
-        }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen font-sans flex flex-col justify-between">
 
+    <!-- 상단 헤더 -->
     <header class="bg-slate-900 border-b border-slate-800 p-6 text-center shadow-lg">
         <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-500 to-orange-500">
-            웨스테로스 대륙 세력 및 대가문 계층도
+            웨스테로스 세력 및 봉신 가문 계층도
         </h1>
-        <p class="text-slate-400 mt-2 text-sm">얼음과 불의 노래 공식 세계관 7왕국 가계도 및 세력 매핑 시스템</p>
+        <p class="text-slate-400 mt-2 text-sm">얼음과 불의 노래 공식 고증 가계도형 세력 구조 매핑 시스템</p>
     </header>
 
+    <!-- 메인 컨텐츠 영역 -->
     <main class="max-w-7xl w-full mx-auto p-6 grid grid-cols-1 lg:grid-cols-4 gap-8 items-start my-auto">
         
-        <div class="lg:col-span-3 bg-slate-900/60 border border-slate-800 rounded-2xl p-6 shadow-2xl relative">
-            <h2 class="text-xl font-bold mb-8 flex items-center gap-2 text-amber-400">
-                <span>👑</span> Westeros Lineage Tree (가문 연동 계층도)
+        <!-- 왼쪽: 실선 구조의 가계도 트리 (3컬럼 차지) -->
+        <div class="lg:col-span-3 bg-slate-900/60 border border-slate-800 rounded-2xl p-6 shadow-2xl">
+            <h2 class="text-xl font-bold mb-6 flex items-center gap-2 text-amber-400">
+                <span>👑</span> Westeros Hierarchy Tree (가문-봉신 연동 트리)
             </h2>
             
-            <div class="flex flex-col items-center relative">
+            <div class="flex flex-col items-center">
                 
-                <div class="bg-slate-800 border-2 border-slate-600 rounded-xl p-4 w-60 text-center shadow-xl relative z-10">
-                    <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Base Continent</div>
-                    <div class="text-xl font-black text-amber-400 font-mono">웨스테로스 대륙</div>
-                    <div class="text-[11px] text-slate-400 font-mono mt-1.5 border-t border-slate-700 pt-1">
-                        Westeros Authority
-                    </div>
+                <!-- [최상위 부모] 웨스테로스 대륙 -->
+                <div class="bg-slate-800 border-2 border-slate-600 rounded-xl p-4 w-64 text-center shadow-xl z-10">
+                    <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Root Continent</div>
+                    <div class="text-xl font-black text-amber-400">웨스테로스 대륙</div>
                 </div>
 
-                <div class="w-0.5 h-8 bg-slate-600 relative"></div>
-                
-                <div class="w-5/6 border-t-2 border-slate-600 h-6 relative"></div>
+                <!-- 부모 -> 대가문 리스트 수직 연결선 -->
+                <div class="w-0.5 h-6 bg-slate-700"></div>
 
-                <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8 w-full -mt-6 relative z-10">
+                <!-- 대가문 및 독립세력 가로 나열 그리드 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 w-full pt-2 border-t border-slate-800">
                     
-                    <button onclick="viewDetails('Stark')" id="card-Stark" 
-                        class="tree-line bg-slate-900/50 border border-slate-800 hover:border-amber-600/50 rounded-xl p-3 text-center transition-all duration-300 shadow-md group cursor-pointer focus:outline-none relative">
-                        <div class="text-xl mb-1 group-hover:scale-110 transition-transform">🐺</div>
-                        <div class="text-xs text-slate-400 font-medium">북부</div>
-                        <div class="text-sm font-bold text-slate-200 mt-0.5">스타크 가문</div>
-                        <div class="text-[9px] bg-blue-950/60 text-blue-400 border border-blue-900/50 rounded py-0.5 px-1.5 mt-2 inline-block font-mono">Region & House</div>
-                    </button>
+                    <!-- 1. 북부 스타크 세력 -->
+                    <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800/80">
+                        <button onclick="viewDetails('Stark')" id="node-Stark"
+                            class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500 rounded-lg p-2.5 text-left transition-all cursor-pointer">
+                            <span class="text-sm font-bold text-blue-400 block">🛡️ 북부</span>
+                            <span class="text-base font-black text-slate-200">스타크 가문</span>
+                        </button>
+                        <!-- 봉신 가문 가계도 선 연결 구조 -->
+                        <div class="mt-2 pl-3 border-l-2 border-slate-700 space-y-1.5 text-left">
+                            <button onclick="viewDetails('Mormont')" id="node-Mormont" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">├─ 🐻 모르몬트 가문</button>
+                            <button onclick="viewDetails('Karstark')" id="node-Karstark" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">├─ ☀️ 카스타크 가문</button>
+                            <button onclick="viewDetails('Bolton')" id="node-Bolton" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">└─ 🩸 볼튼 가문</button>
+                        </div>
+                    </div>
 
-                    <button onclick="viewDetails('Lannister')" id="card-Lannister" 
-                        class="tree-line bg-slate-900/50 border border-slate-800 hover:border-amber-600/50 rounded-xl p-3 text-center transition-all duration-300 shadow-md group cursor-pointer focus:outline-none relative">
-                        <div class="text-xl mb-1 group-hover:scale-110 transition-transform">🦁</div>
-                        <div class="text-xs text-slate-400 font-medium">서부 연지</div>
-                        <div class="text-sm font-bold text-slate-200 mt-0.5">라니스터 가문</div>
-                        <div class="text-[9px] bg-amber-950/60 text-amber-400 border border-amber-900/50 rounded py-0.5 px-1.5 mt-2 inline-block font-mono">Region & House</div>
-                    </button>
+                    <!-- 2. 서부 라니스터 세력 -->
+                    <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800/80">
+                        <button onclick="viewDetails('Lannister')" id="node-Lannister"
+                            class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500 rounded-lg p-2.5 text-left transition-all cursor-pointer">
+                            <span class="text-sm font-bold text-amber-500 block">🦁 웨스터랜드</span>
+                            <span class="text-base font-black text-slate-200">라니스터 가문</span>
+                        </button>
+                        <div class="mt-2 pl-3 border-l-2 border-slate-700 space-y-1.5 text-left">
+                            <button onclick="viewDetails('Crakehall')" id="node-Crakehall" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">├─ 🐗 크레이크홀 가문</button>
+                            <button onclick="viewDetails('Marbrand')" id="node-Marbrand" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">├─ 🔥 마르브랜드 가문</button>
+                            <button onclick="viewDetails('Clegane')" id="node-Clegane" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">└─ 🐕 클레가인 가문</button>
+                        </div>
+                    </div>
 
-                    <button onclick="viewDetails('Targaryen')" id="card-Targaryen" 
-                        class="tree-line bg-slate-900/50 border border-slate-800 hover:border-amber-600/50 rounded-xl p-3 text-center transition-all duration-300 shadow-md group cursor-pointer focus:outline-none relative">
-                        <div class="text-xl mb-1 group-hover:scale-110 transition-transform">🐉</div>
-                        <div class="text-xs text-slate-400 font-medium">국왕령 (드래곤스톤)</div>
-                        <div class="text-sm font-bold text-slate-200 mt-0.5">타르가르옌 가문</div>
-                        <div class="text-[9px] bg-red-950/60 text-red-400 border border-red-900/50 rounded py-0.5 px-1.5 mt-2 inline-block font-mono">Region & House</div>
-                    </button>
+                    <!-- 3. 리버랜드 툴리 세력 -->
+                    <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800/80">
+                        <button onclick="viewDetails('Tully')" id="node-Tully"
+                            class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500 rounded-lg p-2.5 text-left transition-all cursor-pointer">
+                            <span class="text-sm font-bold text-teal-400 block">🐟 리버랜드</span>
+                            <span class="text-base font-black text-slate-200">툴리 가문</span>
+                        </button>
+                        <div class="mt-2 pl-3 border-l-2 border-slate-700 space-y-1.5 text-left">
+                            <button onclick="viewDetails('Mallister')" id="node-Mallister" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">├─ 🦅 말리스터 가문</button>
+                            <button onclick="viewDetails('Blackwood')" id="node-Blackwood" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">├─ 🐦 블랙우드 가문</button>
+                            <button onclick="viewDetails('Frey')" id="node-Frey" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">└─ 🏰 프레이 가문</button>
+                        </div>
+                    </div>
 
-                    <button onclick="viewDetails('Tully')" id="card-Tully" 
-                        class="tree-line bg-slate-900/50 border border-slate-800 hover:border-amber-600/50 rounded-xl p-3 text-center transition-all duration-300 shadow-md group cursor-pointer focus:outline-none relative">
-                        <div class="text-xl mb-1 group-hover:scale-110 transition-transform">🐟</div>
-                        <div class="text-xs text-slate-400 font-medium">리버랜드</div>
-                        <div class="text-sm font-bold text-slate-200 mt-0.5">툴리 가문</div>
-                        <div class="text-[9px] bg-teal-950/60 text-teal-400 border border-teal-900/50 rounded py-0.5 px-1.5 mt-2 inline-block font-mono">Region & House</div>
-                    </button>
+                    <!-- 4. 국왕령 및 독립 단체 (밤의 경비대 포함) -->
+                    <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800/80 space-y-4">
+                        <!-- 국왕령 타르가르옌 -->
+                        <div>
+                            <button onclick="viewDetails('Targaryen')" id="node-Targaryen"
+                                class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500 rounded-lg p-2.5 text-left transition-all cursor-pointer">
+                                <span class="text-sm font-bold text-red-500 block">🐉 국왕령 (드래곤스톤)</span>
+                                <span class="text-base font-black text-slate-200">타르가르옌 가문</span>
+                            </button>
+                            <div class="mt-1 pl-3 border-l-2 border-slate-700 text-left">
+                                <button onclick="viewDetails('Velaryon')" id="node-Velaryon" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">└─ ⚓ 벨라리온 가문</button>
+                            </div>
+                        </div>
 
-                    <button onclick="viewDetails('Baratheon')" id="card-Baratheon" 
-                        class="tree-line bg-slate-900/50 border border-slate-800 hover:border-amber-600/50 rounded-xl p-3 text-center transition-all duration-300 shadow-md group cursor-pointer focus:outline-none relative">
-                        <div class="text-xl mb-1 group-hover:scale-110 transition-transform">🦌</div>
-                        <div class="text-xs text-slate-400 font-medium">스톰랜드</div>
-                        <div class="text-sm font-bold text-slate-200 mt-0.5">바라테온 가문</div>
-                        <div class="text-[9px] bg-yellow-950/60 text-yellow-400 border border-yellow-900/50 rounded py-0.5 px-1.5 mt-2 inline-block font-mono">Region & House</div>
-                    </button>
-
-                    <button onclick="viewDetails('Greyjoy')" id="card-Greyjoy" 
-                        class="tree-line bg-slate-900/50 border border-slate-800 hover:border-amber-600/50 rounded-xl p-3 text-center transition-all duration-300 shadow-md group cursor-pointer focus:outline-none relative">
-                        <div class="text-xl mb-1 group-hover:scale-110 transition-transform">🦑</div>
-                        <div class="text-xs text-slate-400 font-medium">강철 군도</div>
-                        <div class="text-sm font-bold text-slate-200 mt-0.5">그레이조이 가문</div>
-                        <div class="text-[9px] bg-cyan-950/60 text-cyan-400 border border-cyan-900/50 rounded py-0.5 px-1.5 mt-2 inline-block font-mono">Region & House</div>
-                    </button>
-
-                    <button onclick="viewDetails('Martell')" id="card-Martell" 
-                        class="tree-line bg-slate-900/50 border border-slate-800 hover:border-amber-600/50 rounded-xl p-3 text-center transition-all duration-300 shadow-md group cursor-pointer focus:outline-none relative">
-                        <div class="text-xl mb-1 group-hover:scale-110 transition-transform">☀️</div>
-                        <div class="text-xs text-slate-400 font-medium">도르네</div>
-                        <div class="text-sm font-bold text-slate-200 mt-0.5">마르텔 가문</div>
-                        <div class="text-[9px] bg-orange-950/60 text-orange-400 border border-orange-900/50 rounded py-0.5 px-1.5 mt-2 inline-block font-mono">Region & House</div>
-                    </button>
-
-                    <button onclick="viewDetails('Tyrell')" id="card-Tyrell" 
-                        class="tree-line bg-slate-900/50 border border-slate-800 hover:border-amber-600/50 rounded-xl p-3 text-center transition-all duration-300 shadow-md group cursor-pointer focus:outline-none relative">
-                        <div class="text-xl mb-1 group-hover:scale-110 transition-transform">🌹</div>
-                        <div class="text-xs text-slate-400 font-medium">리치 지방</div>
-                        <div class="text-sm font-bold text-slate-200 mt-0.5">티렐 가문</div>
-                        <div class="text-[9px] bg-green-950/60 text-green-400 border border-green-900/50 rounded py-0.5 px-1.5 mt-2 inline-block font-mono">Region & House</div>
-                    </button>
+                        <!-- 독립 특수 세력: 밤의 경비대 -->
+                        <div class="border-t border-slate-800 pt-3">
+                            <button onclick="viewDetails('NightWatch')" id="node-NightWatch"
+                                class="w-full bg-slate-950 border-2 border-dashed border-slate-700 hover:border-slate-400 rounded-lg p-2.5 text-left transition-all cursor-pointer">
+                                <span class="text-sm font-bold text-slate-400 block">❄️ 장벽 방어 군단</span>
+                                <span class="text-base font-black text-slate-100 flex items-center gap-1">밤의 경비대 <span class="text-xs font-normal text-slate-500">(Night's Watch)</span></span>
+                            </button>
+                        </div>
+                    </div>
 
                 </div>
             </div>
         </div>
 
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-2xl flex flex-col h-[560px]">
+        <!-- 오른쪽: 계층 구조 상세 정보 뷰어 (1컬럼 차지) -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-2xl flex flex-col h-[520px]">
             <h2 class="text-lg font-bold mb-3 flex items-center gap-2 text-amber-500">
-                <span>⚔️</span> Lineage Info View
+                <span>⚔️</span> Lineage Detail View
             </h2>
             
-            <div id="monitor-view" class="bg-slate-950 rounded-xl p-4 flex-1 border border-slate-900 flex flex-col justify-start overflow-y-auto text-left transition-all duration-300">
+            <div id="monitor-view" class="bg-slate-950 rounded-xl p-4 flex-1 border border-slate-950 flex flex-col justify-start overflow-y-auto text-left">
+                <!-- 대기 화면 -->
                 <div id="monitor-empty" class="h-full flex flex-col justify-center items-center text-center text-slate-600">
-                    <div class="text-4xl mb-2">🛡️</div>
-                    <div class="text-sm font-semibold">지역 및 가문 선택</div>
-                    <div class="text-xs text-slate-500 mt-1">상속된 봉신 가문 및 영웅 정보가 실시간으로 출력됩니다.</div>
+                    <div class="text-4xl mb-2">🏰</div>
+                    <div class="text-sm font-semibold">세력 또는 가문 선택</div>
+                    <div class="text-xs text-slate-500 mt-1">좌측 계층 트리의 가문 및 봉신을 클릭하면 상세 설명과 대표자가 출력됩니다.</div>
                 </div>
                 
+                <!-- 상세 내용 바인딩 패널 -->
                 <div id="monitor-content" class="hidden space-y-4">
-                    <div class="border-b border-slate-800 pb-2.5">
-                        <div class="flex items-center gap-1.5">
-                            <span id="m-icon" class="text-2xl"></span>
-                            <div>
-                                <span id="m-region" class="text-[10px] text-amber-500 font-bold block uppercase tracking-wide"></span>
-                                <span id="m-house" class="text-base font-extrabold text-slate-100"></span>
-                            </div>
-                        </div>
-                        <p id="m-desc" class="text-xs text-slate-300 mt-2 leading-relaxed bg-slate-900 p-2 rounded border border-slate-800/50"></p>
-                        <p id="m-motto" class="text-xs text-yellow-400 font-serif italic mt-1.5 px-1"></p>
+                    <div>
+                        <span id="m-type" class="text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wide"></span>
+                        <h3 id="m-title" class="text-xl font-extrabold text-slate-100 mt-1.5"></h3>
+                        <p id="m-motto" class="text-xs text-yellow-400 font-serif italic mt-1"></p>
                     </div>
 
-                    <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800/60">
-                        <div class="text-[11px] font-bold text-emerald-400 uppercase tracking-wide">👤 가문별 대표 인물</div>
-                        <div class="bg-slate-950 p-2 rounded border border-slate-800/80 mt-1.5">
-                            <div id="m-char-name" class="text-xs font-bold text-slate-200"></div>
-                            <p id="m-char-desc" class="text-[11px] text-slate-400 mt-1 leading-relaxed"></p>
-                        </div>
+                    <div class="bg-slate-900 p-3 rounded-lg border border-slate-800">
+                        <div class="text-xs font-bold text-slate-400 mb-1">🏰 세력 소개 및 역할</div>
+                        <p id="m-desc" class="text-xs text-slate-300 leading-relaxed"></p>
                     </div>
 
-                    <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800/60">
-                        <div class="text-[11px] font-bold text-indigo-400 uppercase tracking-wide">📦 봉신 가문과 대표 인물</div>
-                        <div class="bg-slate-950 p-2 rounded border border-slate-800/80 mt-1.5">
-                            <div id="m-vassal-title" class="text-xs font-bold text-slate-200"></div>
-                            <p id="m-vassal-desc" class="text-[11px] text-slate-400 mt-1 leading-relaxed"></p>
-                        </div>
+                    <div class="bg-slate-900 p-3 rounded-lg border border-slate-800">
+                        <div class="text-xs font-bold text-emerald-400 mb-1">👤 대표자 / 주요 인물</div>
+                        <div id="m-leader" class="text-sm font-bold text-slate-200"></div>
+                        <p id="m-leader-desc" class="text-xs text-slate-400 mt-1 leading-relaxed"></p>
                     </div>
                 </div>
             </div>
 
+            <!-- 하단 로그 기록기 -->
             <div class="mt-3">
-                <div class="text-[9px] font-semibold uppercase text-slate-500 tracking-wider mb-1">Lineage Log Stream</div>
-                <div id="console-log" class="bg-black/50 border border-slate-900 rounded-lg p-2 font-mono text-[10px] text-green-400 h-20 overflow-y-auto">
-                    > 대륙 계층 시스템 초기화 완료.<br>
-                    > 가계도 실선 노드 연결 상태: 정상.
+                <div id="console-log" class="bg-black/40 border border-slate-950 rounded-lg p-2 font-mono text-[10px] text-green-400 h-16 overflow-y-auto">
+                    > 시스템 초기화 완료. 가계도 노드 연동 중...
                 </div>
             </div>
         </div>
 
     </main>
 
+    <!-- 하단 푸터 -->
     <footer class="bg-slate-950 border-t border-slate-900 p-4 text-center text-xs text-slate-600">
         얼음과 불의 노래: 웨스테로스 대륙 가문 연동 시뮬레이터 시스템
     </footer>
 
+    <!-- 핵심 데이터 구조 및 이벤트 스크립트 -->
     <script>
-        // 나무위키 고증 기반 세력 매핑 데이터 구조
-        const westerosData = {
+        const hierarchyData = {
+            // --- 대가문 클래스 데이터 ---
             Stark: {
-                icon: "🐺", region: "북부 (The North)", house: "스타크 가문 (House Stark)",
-                desc: "수천 년 동안 북부를 통치해 온 유서 깊은 왕가 출신 대가문으로, 장벽을 지키며 겨울을 대비하는 자들입니다.",
-                motto: "가문 표어: \"겨울이 오고 있다 (Winter Is Coming)\"",
-                charName: "에다드 스타크 (Eddard Stark)",
-                charDesc: "윈터펠의 영주이자 북부의 관리자. 명예와 규율을 목숨보다 소중히 여기는 인물로 전 왕국의 존경을 받습니다.",
-                vassalTitle: "볼튼 가문 (House Bolton) ➔ 대표 인물: 루스 볼튼",
-                vassalDesc: "스타크 가문의 오랜 강력한 북부 봉신 가문. 가문의 문장은 산 채로 껍질이 벗겨진 사람이며, 음험하고 잔혹한 야심을 품고 있습니다."
+                type: "대가문", title: "스타크 가문 (House Stark)", motto: "\"겨울이 오고 있다 (Winter Is Coming)\"",
+                desc: "수천 년간 북부를 통치한 영주 가문으로, 혹독한 기후를 견디며 대륙 최북단의 장벽을 관리하고 다가올 겨울의 위협을 방비하는 중추적인 역할을 합니다.",
+                leader: "에다드 스타크 (Eddard Stark)", leaderDesc: "윈터펠의 영주이자 북부의 관리자. 칠왕국에서 가장 명예를 중시하는 인물로 북부인들의 압도적인 충성을 받습니다."
             },
             Lannister: {
-                icon: "🦁",
-                region: "서부 (The Westerlands)", house: "라니스터 가문 (House Lannister)",
-                desc: "캐스터리 록의 거대한 금광을 바탕으로 웨스테로스 전 대륙에서 가장 부유하고 막강한 권력을 지닌 가문입니다.",
-                motto: "가문 표어: \"내 포효를 들으라 (Hear Me Roar)\"",
-                charName: "타이윈 라니스터 (Tywin Lannister)",
-                charDesc: "서부의 관리자이자 가문의 수장. 냉혹하고 영리한 정치가로, 가문의 번영과 권력을 위해서라면 수단과 방법을 가리지 않습니다.",
-                vassalTitle: "클레가인 가문 (House Clegane) ➔ 대표 인물: 그레고르 클레가인",
-                vassalDesc: "라니스터 가문에 절대적으로 충성하는 기사 봉신 가문. 대표인물 그레고르(거산)는 압도적인 무력으로 라니스터의 더러운 일을 도맡아 수행합니다."
-            },
-            Targaryen: {
-                icon: "🐉", region: "국왕령 (드래곤스톤)", house: "타르가르옌 가문 (House Targaryen)",
-                desc: "발리리아의 후손이자 드래곤을 부려 웨스테로스 대륙의 7왕국을 최초로 하나로 통일하고 철왕좌를 만든 고대 왕가입니다.",
-                motto: "가문 표어: \"불과 피 (Fire and Blood)\"",
-                charName: "대너리스 타르가르옌 (Daenerys Targaryen)",
-                charDesc: "폭풍의 아이. 멸망한 왕가의 마지막 후손으로, 동대륙을 거쳐 세 마리의 드래곤과 함께 왕권을 되찾으려는 정복자입니다.",
-                vassalTitle: "벨라리온 가문 (House Velaryon) ➔ 대표 인물: 코를리스 벨라리온",
-                vassalDesc: "타르가르옌과 같은 고대 발리리아 혈통의 최측근 핵심 봉신. 대대로 강력한 조선술과 함대를 이끌며 국왕령의 해상 해군력을 책임집니다."
+                type: "대가문", title: "라니스터 가문 (House Lannister)", motto: "\"내 포효를 들으라! (Hear Me Roar!)\"",
+                desc: "웨스터랜드의 지배자로, 캐스터리 록의 거대한 금광을 소유하여 칠왕국에서 가장 부유합니다. 막강한 자금력으로 왕실 채무를 쥐고 흔들며 권력의 정점에 서 있습니다.",
+                leader: "타이윈 라니스터 (Tywin Lannister)", leaderDesc: "서부의 관리자이자 가문의 장장. 냉혹하고 계산이 빠른 최고의 정치 지략가로 가문의 이익을 절대적으로 추구합니다."
             },
             Tully: {
-                icon: "🐟", region: "리버랜드 (The Riverlands)", house: "툴리 가문 (House Tully)",
-                desc: "삼면강 유역의 풍요로운 강과 비옥한 평야를 다스리는 가문으로, 사방이 뚫려있어 역사적으로 잦은 전란을 겪었습니다.",
-                motto: "가문 표어: \"가족, 의무, 명예 (Family, Duty, Honor)\"",
-                charName: "호스터 툴리 (Hoster Tully)",
-                charDesc: "리버런의 영주이자 툴리 가문의 수장. 동맹과 결혼을 통해 가문의 안위를 지키고자 헌신한 정치가입니다.",
-                vassalTitle: "프레이 가문 (House Frey) ➔ 대표 인물: 왈더 프레이",
-                vassalDesc: "리버랜드의 쌍둥이 성을 지키는 강력한 봉신 가문. 통행세를 징수하며 세력을 키웠으며, 수장 왈더 프레이는 기회주의적이고 탐욕스러운 인물입니다."
+                type: "대가문", title: "툴리 가문 (House Tully)", motto: "\"가족, 의무, 명예 (Family, Duty, Honor)\"",
+                desc: "리버랜드의 통치 가문으로 비옥한 삼면강 유역을 관장합니다. 지리적으로 사방이 탁 트여 전란의 중심지가 되기 쉬우며, 외교와 혼인 동맹으로 생존을 도모합니다.",
+                leader: "호스터 툴리 (Hoster Tully)", leaderDesc: "리버런의 영주. 가문의 안위를 최우선으로 삼아 스타크, 아린 가문과의 정략결혼을 성사시킨 베테랑 영주입니다."
             },
-            Baratheon: {
-                icon: "🦌", region: "스톰랜드 (The Stormlands)", house: "바라테온 가문 (House Baratheon)",
-                desc: "타르가르옌 왕조를 무너뜨린 로버트의 반란 이후, 전 대륙의 중심인 철왕좌를 차지했던 강인한 전사들의 가문입니다.",
-                motto: "가문 표어: \"맹렬한 우리 분노 (Ours is the Fury)\"",
-                charName: "로버트 바라테온 (Robert Baratheon)",
-                charDesc: "반란을 이끌어 칠왕국의 국왕이 된 인물. 과거 전장을 호령하던 최강의 전사였으나, 왕위에 오른 뒤 방탕한 생활을 이어갑니다.",
-                vassalTitle: "타스 가문 (House Tarth) ➔ 대표 인물: 브리엔 타스",
-                vassalDesc: "스톰랜드 사파이어 섬을 다스리는 유서 깊은 봉신. 가문원인 브리엔은 기사 이상의 충성심과 무력을 지닌 여전사입니다."
+            Targaryen: {
+                type: "왕가 (고대)", title: "타르가르옌 가문 (House Targaryen)", motto: "\"불과 피 (Fire and Blood)\"",
+                desc: "고대 발리리아의 후손이자 드래곤을 지배했던 가문. 용의 힘을 빌려 흩어져 있던 웨스테로스의 7왕국을 하나로 묶고 철왕좌 왕조를 개창했던 절대 정복자들입니다.",
+                leader: "대너리스 타르가르옌 (Daenerys Targaryen)", leaderDesc: "폭풍의 아이. 가문의 마지막 생존자로, 세 마리의 용을 부화시키며 철왕좌의 정당한 권리를 되찾기 위해 군대를 모으는 정복자입니다."
             },
-            Greyjoy: {
-                icon: "🦑", region: "강철 군도 (Iron Islands)", house: "그레이조이 가문 (House Greyjoy)",
-                desc: "척박한 대륙 서쪽 섬들에 거주하며, 바다를 무대로 강력한 강철 함대를 이끌고 침략과 약탈을 일삼아 온 해양 가문입니다.",
-                motto: "가문 표어: \"우리는 씨를 뿌리지 않는다 (We Do Not Sow)\"",
-                charName: "발론 그레이조이 (Balon Greyjoy)",
-                charDesc: "강철 군도의 영주. 고대 방식의 약탈 전통을 부활시키고자 대륙을 향해 여러 번 반란을 일으킨 고집스럽고 냉혹한 수장입니다.",
-                vassalTitle: "할로우 가문 (House Harlaw) ➔ 대표 인물: 로드릭 할로우",
-                vassalDesc: "강철 군도 내에서 가장 비옥한 영지와 부를 지닌 거대 봉신 가문. 수장 로드릭은 독서를 즐겨 '책벌레'라 불리는 지략가입니다."
+
+            // --- 스타크 가문 봉신 가문 데이터 ---
+            Mormont: {
+                type: "스타크가 봉신", title: "모르몬트 가문 (House Mormont)", motto: "\"우리는 서 있다 (Here We Stand)\"",
+                desc: "북부 곰 섬의 영주 가문. 척박한 환경 탓에 풍요롭지는 않으나, 남녀를 가리지 않고 전투에 임하는 강인하고 충직한 전사 가문으로 스타크에 대한 충성심이 매우 깊습니다.",
+                leader: "제오르 모르몬트 / 조라 모르몬트", leaderDesc: "과거 영주였던 제오르는 밤의 경비대 총사령관이 되었고, 그의 아들 조라 모르몬트는 불명예로 추방당해 방랑 중입니다."
             },
-            Martell: {
-                icon: "☀️", region: "도르네 (Dorne)", house: "마르텔 가문 (House Martell)",
-                desc: "웨스테로스 남단의 사막 지대를 다스리며, 타르가르옌의 드래곤 침공에도 유일하게 굴복하지 않고 독립성을 유지했던 가문입니다.",
-                motto: "가문 표어: \" 굴하지 않고, 꺾이지 않으며, 깨어지지 않는다 (Unbowed, Unbent, Unbroken)\"",
-                charName: "오베린 마르텔 (Oberyn Martell)",
-                charDesc: "도르네의 대공 마르텔의 동생이자 '붉은 독사'라 불리는 최고의 무술가. 치명적인 독과 창술을 다루며 가문의 원수를 갚으려 합니다.",
-                vassalTitle: "데이인 가문 (House Dayne) ➔ 대표 인물: 아서 데이인",
-                vassalDesc: "도르네 최강의 무력을 자랑하는 오랜 봉신. 가문의 전설적인 인물 아서 데이인은 '아침의 검'이라 불리며 웨스테로스 역사상 최고의 기사로 꼽힙니다."
+            Karstark: {
+                type: "스타크가 봉신", title: "카스타크 가문 (House Karstark)", motto: "\"겨울의 태양 (The Sun of Winter)\"",
+                desc: "카홀드의 영주 가문으로, 수백 년 전 스타크 가문에서 갈라져 나온 방계 혈통입니다. 사실상 친족 가문이기 때문에 강력한 군사력을 바탕으로 북부 전선의 핵심 역할을 맡습니다.",
+                leader: "릭카드 카스타크 (Rickard Karstark)", leaderDesc: "카스타크 가문의 영주. 고집스럽고 명예를 중시하며, 가문의 피를 이은 만큼 스타크의 군사 행동에 선봉으로 참여합니다."
             },
-            Tyrell: {
-                icon: "🌹", region: "리치 (The Reach)", house: "티렐 가문 (House Tyrell)",
-                desc: "가장 넓고 비옥한 곡창지대를 점령하여 막대한 인구수와 풍요로운 식량 보급, 세련된 기사 문화를 자랑하는 풍요의 가문입니다.",
-                motto: "가문 표어: \"강성하게 자라나라 (Growing Strong)\"",
-                charName: "마르제리 티렐 (Margaery Tyrell)",
-                charDesc: "티렐 가문의 영애. 아름다운 외모와 뛰어난 사교성, 영리한 두뇌와 정치적 감각을 지녀 백성들의 사랑을 한몸에 받는 인물입니다.",
-                vassalTitle: "탈리 가문 (House Tarly) ➔ 대표 인물: 랜딜 탈리",
-                vassalDesc: "리치 지방 최강의 호전적인 기사 무력을 자랑하는 핵심 군사 봉신. 수장 랜딜 탈리는 가문 대대로 내려오는 대검을 쥐고 야전 사령관 역할을 전담합니다."
+            Bolton: {
+                type: "스타크가 봉신", title: "볼튼 가문 (House Bolton)", motto: "\"우리 칼날은 날카롭다 (Our Blades Are Sharp)\"",
+                desc: "드레드포트의 영주 가문. 과거 북부의 패권을 두고 스타크 가문과 수백 년간 전쟁을 벌였던 숙적이자 현재는 가장 거대하고 위험한 북부의 봉신 가문입니다.",
+                leader: "루스 볼튼 (Roose Bolton)", leaderDesc: "드레드포트의 영주. 감정을 전혀 드러내지 않는 싸늘한 인물로, 언제든 이익에 따라 배신할 야심을 숨기고 있습니다."
+            },
+
+            // --- 라니스터 가문 봉신 가문 데이터 ---
+            Crakehall: {
+                type: "라니스터가 봉신", title: "크레이크홀 가문 (House Crakehall)", motto: "\"우리만큼 강한 자는 없다\"",
+                desc: "서부 영지의 유서 깊은 봉신으로 가문원 대부분이 덩치가 크고 무력이 뛰어난 기사들을 대거 배출하여 라니스터 군대의 선봉 맷집 역할을 수행합니다.",
+                leader: "롤랜드 크레이크홀", leaderDesc: "가문의 핵심 기사이자 장수로, 라니스터 군 작전에서 야전 사령관 역할을 도맡아 합니다."
+            },
+            Marbrand: {
+                type: "라니스터가 봉신", title: "마르브랜드 가문 (House Marbrand)", motto: "\"길을 밝히다\"",
+                desc: "애쉬마크의 영주 가문. 타이윈 라니스터의 어머니가 이 가문 출신일 정도로 혈연적으로 가깝고 신뢰도가 높은 서부의 핵심 기사단 세력입니다.",
+                leader: "아담 마르브랜드 (Addam Marbrand)", leaderDesc: "서부 최정예 전사이자 대장. 전술적 안목이 뛰어나 타이윈 라니스터가 전초 기사대장으로 크게 신임합니다."
+            },
+            Clegane: {
+                type: "라니스터가 봉신", title: "클레가인 가문 (House Clegane)", motto: "(공식 표어 없음 - 사냥개 세 마리)",
+                desc: "타이윈의 아버지를 사냥개로 구한 공로로 영지를 받은 신생 무가(武家) 가문. 오직 라니스터 가문에 대한 맹목적인 무력 충성과 더러운 일 처리를 담당하는 돌격대 세력입니다.",
+                leader: "그레고르 클레가인 (Gregor Clegane)", leaderDesc: "'거산(The Mountain)'이라 불리는 거구의 기사. 압도적인 잔혹함과 전투력으로 적들에게 공포를 심어주는 타이윈의 비밀 병기입니다."
+            },
+
+            // --- 툴리 가문 봉신 가문 데이터 ---
+            Mallister: {
+                type: "툴리가 봉신", title: "말리스터 가문 (House Mallister)", motto: "\"바다를 경계하라\"",
+                desc: "시가드의 영주 가문. 서쪽 바다에서 쳐들어오는 강철 군도 약탈자들을 최전선에서 방어하는 요새 역할을 수행하는 전통 깊은 해안 방위 가문입니다.",
+                leader: "제이슨 말리스터 (Jason Mallister)", leaderDesc: "시가드의 영주. 뛰어난 전사이자 기사로 강철 군도와의 전쟁에서 수많은 공을 세운 노련한 인물입니다."
+            },
+            Blackwood: {
+                type: "툴리가 봉신", title: "블랙우드 가문 (House Blackwood)", motto: "(공식 표어 없음)",
+                desc: "레이븐트리의 영주 가문. 리버랜드에서 유일하게 옛 신(위어우드)을 믿는 가문으로, 이웃한 브라켄 가문과 수천 년째 피의 원수 관계로 다투고 있습니다.",
+                leader: "티토스 블랙우드 (Tytos Blackwood)", leaderDesc: "레이븐트리 홀의 영주. 화려한 까마귀 깃털 망토를 입고 전투에 임하는 강직하고 명예로운 인물입니다."
+            },
+            Frey: {
+                type: "툴리가 봉신", title: "프레이 가문 (House Frey)", motto: "\"우리가 길을 가로막는다\"",
+                desc: "그린포크 강을 가로지르는 전략적 요충지 '쌍둥이 성'의 영주 가문. 통행세를 통해 막대한 부와 군사력을 쌓았으나 기회주의적인 성향 때문에 대가문들에게 은근히 멸시받습니다.",
+                leader: "왈더 프레이 (Walder Frey)", leaderDesc: "쌍둥이 성의 노영주. 90세가 넘은 탐욕스럽고 심술궂은 인물로, 가문이 무시당하는 것에 엄청난 열등감과 앙심을 품고 있습니다."
+            },
+
+            // --- 타르가르옌 가문 봉신 가문 데이터 ---
+            Velaryon: {
+                type: "타르가르옌가 봉신", title: "벨라리온 가문 (House Velaryon)", motto: "\"오래된 전설, 진실된 혈통\"",
+                desc: "드리프트마크의 영주 가문. 타르가르옌과 마찬가지로 고대 발리리아 혈통이며, 대대로 왕국의 해군 제독직을 독점하며 국왕령의 해상 군사력을 책임지는 가문입니다.",
+                leader: "코를리스 벨라리온 (Corlys Velaryon)", leaderDesc: "'바다 뱀'으로 명성을 떨친 전설적인 항해사이자 영주. 역사상 가문을 가장 부유하고 강력하게 키워낸 수장입니다."
+            },
+
+            // --- 독립 특수 세력 데이터 ---
+            NightWatch: {
+                type: "독립 군단", title: "밤의 경비대 (Night's Watch)", motto: "\"내 초소는 장벽이며, 나는 어둠을 밝히는 불꽃이다\"",
+                desc: "웨스테로스 최북단의 거대한 고대 건축물 '장벽(The Wall)'을 지키며 대륙을 위협하는 장벽 너머의 와일들링과 고대 전설 속 괴물인 '아더(백귀)'들로부터 인류를 보호하는 독립 군사 단체입니다. 신분과 범죄 이력을 막론하고 서약을 하면 대륙의 정치와 단절된 채 평생 장벽을 지켜야 합니다.",
+                leader: "존 스노우 (Jon Snow)", leaderDesc: "에다드 스타크의 서자 출신 서약 형제. 남다른 리더십과 전술로 장벽 너머의 진정한 위협을 가장 먼저 간파하고 경비대를 이끄는 차세대 총사령관 후보입니다."
             }
         };
 
-        function viewDetails(houseKey) {
-            const data = westerosData[houseKey];
-            
-            // 1. 트리거 카드 시각 효과 전환
-            Object.keys(westerosData).forEach(k => {
-                const card = document.getElementById(`card-${k}`);
-                if (card) card.classList.remove('active-card');
-            });
-            const activeCard = document.getElementById(`card-${houseKey}`);
-            if (activeCard) activeCard.classList.add('active-card');
+        function viewDetails(key) {
+            const data = hierarchyData[key];
+            if (!data) return;
 
-            // 2. 우측 모니터에 데이터 계층 구조 매핑
+            // 1. 기존 활성화 카드 스타일 해제 및 새 노드 활성화
+            document.querySelectorAll('[id^="node-"]').forEach(el => {
+                el.classList.remove('active-card');
+            });
+            const targetNode = document.getElementById(`node-${key}`);
+            if (targetNode) targetNode.classList.add('active-card');
+
+            // 2. 우측 모니터에 세력 정보 동적 바인딩
             document.getElementById('monitor-empty').classList.add('hidden');
             const content = document.getElementById('monitor-content');
             content.classList.remove('hidden');
-            
-            document.getElementById('m-icon').innerText = data.icon;
-            document.getElementById('m-region').innerText = data.region;
-            document.getElementById('m-house').innerText = data.house;
-            document.getElementById('m-desc').innerText = data.desc;
-            document.getElementById('m-motto').innerText = data.motto;
-            
-            document.getElementById('m-char-name').innerText = data.charName;
-            document.getElementById('m-char-desc').innerText = data.charDesc;
-            
-            document.getElementById('m-vassal-title').innerText = data.vassalTitle;
-            document.getElementById('m-vassal-desc').innerText = data.vassalDesc;
 
-            // 3. 실시간 변경 로그 출력
+            const typeEl = document.getElementById('m-type');
+            typeEl.innerText = data.type;
+            
+            // 타입별 배지 색상 지정
+            if (data.type === "대가문" || data.type === "왕가 (고대)") {
+                typeEl.className = "text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wide bg-amber-950/80 text-amber-400 border border-amber-800";
+            } else if (data.type === "독립 군단") {
+                typeEl.className = "text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wide bg-slate-800 text-slate-300 border border-slate-600";
+            } else {
+                typeEl.className = "text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wide bg-indigo-950/80 text-indigo-400 border border-indigo-900";
+            }
+
+            document.getElementById('m-title').innerText = data.title;
+            document.getElementById('m-motto').innerText = data.motto;
+            document.getElementById('m-desc').innerText = data.desc;
+            document.getElementById('m-leader').innerText = data.leader;
+            document.getElementById('m-leader-desc').innerText = data.leaderDesc;
+
+            // 3. 하단 실시간 콘솔 로그 출력
             const consoleLog = document.getElementById('console-log');
             const timestamp = new Date().toLocaleTimeString();
-            consoleLog.innerHTML += `<br><span class="text-amber-500">[${timestamp}] 계층 탐색: ${data.region} 선택됨</span>`;
-            consoleLog.innerHTML += `<br><span class="text-emerald-400"> ➔ 하위 바인딩: ${data.charName} / ${data.vassalTitle.split(' ➔ ')[0]} 로드 완료.</span>`;
-            
-            consoleLog.scrollTop = consoleLog.scrollHeight;
+            consoleLog.innerHTML = `> [${timestamp}] 계층 노드 호출 성공: [${data.title}]<br>> 대표 데이터셋 스트리밍 완료.`;
         }
     </script>
 </body>
