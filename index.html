@@ -70,7 +70,7 @@
                     <button onclick="viewDetails('Lannister')" id="card-Lannister" 
                         class="tree-line bg-slate-900/50 border border-slate-800 hover:border-amber-600/50 rounded-xl p-3 text-center transition-all duration-300 shadow-md group cursor-pointer focus:outline-none relative">
                         <div class="text-xl mb-1 group-hover:scale-110 transition-transform">🦁</div>
-                        <div class="text-xs text-slate-400 font-medium">서부 영지</div>
+                        <div class="text-xs text-slate-400 font-medium">서부 연지</div>
                         <div class="text-sm font-bold text-slate-200 mt-0.5">라니스터 가문</div>
                         <div class="text-[9px] bg-amber-950/60 text-amber-400 border border-amber-900/50 rounded py-0.5 px-1.5 mt-2 inline-block font-mono">Region & House</div>
                     </button>
@@ -78,7 +78,7 @@
                     <button onclick="viewDetails('Targaryen')" id="card-Targaryen" 
                         class="tree-line bg-slate-900/50 border border-slate-800 hover:border-amber-600/50 rounded-xl p-3 text-center transition-all duration-300 shadow-md group cursor-pointer focus:outline-none relative">
                         <div class="text-xl mb-1 group-hover:scale-110 transition-transform">🐉</div>
-                        <div class="text-xs text-slate-400 font-medium">국왕령 / 드래곤스톤</div>
+                        <div class="text-xs text-slate-400 font-medium">국왕령 (드래곤스톤)</div>
                         <div class="text-sm font-bold text-slate-200 mt-0.5">타르가르옌 가문</div>
                         <div class="text-[9px] bg-red-950/60 text-red-400 border border-red-900/50 rounded py-0.5 px-1.5 mt-2 inline-block font-mono">Region & House</div>
                     </button>
@@ -94,14 +94,14 @@
                     <button onclick="viewDetails('Baratheon')" id="card-Baratheon" 
                         class="tree-line bg-slate-900/50 border border-slate-800 hover:border-amber-600/50 rounded-xl p-3 text-center transition-all duration-300 shadow-md group cursor-pointer focus:outline-none relative">
                         <div class="text-xl mb-1 group-hover:scale-110 transition-transform">🦌</div>
-                        <div class="text-xs text-slate-400 font-medium">폭풍우만</div>
+                        <div class="text-xs text-slate-400 font-medium">스톰랜드</div>
                         <div class="text-sm font-bold text-slate-200 mt-0.5">바라테온 가문</div>
                         <div class="text-[9px] bg-yellow-950/60 text-yellow-400 border border-yellow-900/50 rounded py-0.5 px-1.5 mt-2 inline-block font-mono">Region & House</div>
                     </button>
 
                     <button onclick="viewDetails('Greyjoy')" id="card-Greyjoy" 
                         class="tree-line bg-slate-900/50 border border-slate-800 hover:border-amber-600/50 rounded-xl p-3 text-center transition-all duration-300 shadow-md group cursor-pointer focus:outline-none relative">
-                        <div class="text-xl mb-1 group-hover:scale-110 transition-transform">Squid</div>
+                        <div class="text-xl mb-1 group-hover:scale-110 transition-transform">🦑</div>
                         <div class="text-xs text-slate-400 font-medium">강철 군도</div>
                         <div class="text-sm font-bold text-slate-200 mt-0.5">그레이조이 가문</div>
                         <div class="text-[9px] bg-cyan-950/60 text-cyan-400 border border-cyan-900/50 rounded py-0.5 px-1.5 mt-2 inline-block font-mono">Region & House</div>
@@ -171,4 +171,134 @@
             </div>
 
             <div class="mt-3">
-                <div class
+                <div class="text-[9px] font-semibold uppercase text-slate-500 tracking-wider mb-1">Lineage Log Stream</div>
+                <div id="console-log" class="bg-black/50 border border-slate-900 rounded-lg p-2 font-mono text-[10px] text-green-400 h-20 overflow-y-auto">
+                    > 대륙 계층 시스템 초기화 완료.<br>
+                    > 가계도 실선 노드 연결 상태: 정상.
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-slate-950 border-t border-slate-900 p-4 text-center text-xs text-slate-600">
+        얼음과 불의 노래: 웨스테로스 대륙 가문 연동 시뮬레이터 시스템
+    </footer>
+
+    <script>
+        // 나무위키 고증 기반 세력 매핑 데이터 구조
+        const westerosData = {
+            Stark: {
+                icon: "🐺", region: "북부 (The North)", house: "스타크 가문 (House Stark)",
+                desc: "수천 년 동안 북부를 통치해 온 유서 깊은 왕가 출신 대가문으로, 장벽을 지키며 겨울을 대비하는 자들입니다.",
+                motto: "가문 표어: \"겨울이 오고 있다 (Winter Is Coming)\"",
+                charName: "에다드 스타크 (Eddard Stark)",
+                charDesc: "윈터펠의 영주이자 북부의 관리자. 명예와 규율을 목숨보다 소중히 여기는 인물로 전 왕국의 존경을 받습니다.",
+                vassalTitle: "볼튼 가문 (House Bolton) ➔ 대표 인물: 루스 볼튼",
+                vassalDesc: "스타크 가문의 오랜 강력한 북부 봉신 가문. 가문의 문장은 산 채로 껍질이 벗겨진 사람이며, 음험하고 잔혹한 야심을 품고 있습니다."
+            },
+            Lannister: {
+                icon: "🦁",
+                region: "서부 (The Westerlands)", house: "라니스터 가문 (House Lannister)",
+                desc: "캐스터리 록의 거대한 금광을 바탕으로 웨스테로스 전 대륙에서 가장 부유하고 막강한 권력을 지닌 가문입니다.",
+                motto: "가문 표어: \"내 포효를 들으라 (Hear Me Roar)\"",
+                charName: "타이윈 라니스터 (Tywin Lannister)",
+                charDesc: "서부의 관리자이자 가문의 수장. 냉혹하고 영리한 정치가로, 가문의 번영과 권력을 위해서라면 수단과 방법을 가리지 않습니다.",
+                vassalTitle: "클레가인 가문 (House Clegane) ➔ 대표 인물: 그레고르 클레가인",
+                vassalDesc: "라니스터 가문에 절대적으로 충성하는 기사 봉신 가문. 대표인물 그레고르(거산)는 압도적인 무력으로 라니스터의 더러운 일을 도맡아 수행합니다."
+            },
+            Targaryen: {
+                icon: "🐉", region: "국왕령 (드래곤스톤)", house: "타르가르옌 가문 (House Targaryen)",
+                desc: "발리리아의 후손이자 드래곤을 부려 웨스테로스 대륙의 7왕국을 최초로 하나로 통일하고 철왕좌를 만든 고대 왕가입니다.",
+                motto: "가문 표어: \"불과 피 (Fire and Blood)\"",
+                charName: "대너리스 타르가르옌 (Daenerys Targaryen)",
+                charDesc: "폭풍의 아이. 멸망한 왕가의 마지막 후손으로, 동대륙을 거쳐 세 마리의 드래곤과 함께 왕권을 되찾으려는 정복자입니다.",
+                vassalTitle: "벨라리온 가문 (House Velaryon) ➔ 대표 인물: 코를리스 벨라리온",
+                vassalDesc: "타르가르옌과 같은 고대 발리리아 혈통의 최측근 핵심 봉신. 대대로 강력한 조선술과 함대를 이끌며 국왕령의 해상 해군력을 책임집니다."
+            },
+            Tully: {
+                icon: "🐟", region: "리버랜드 (The Riverlands)", house: "툴리 가문 (House Tully)",
+                desc: "삼면강 유역의 풍요로운 강과 비옥한 평야를 다스리는 가문으로, 사방이 뚫려있어 역사적으로 잦은 전란을 겪었습니다.",
+                motto: "가문 표어: \"가족, 의무, 명예 (Family, Duty, Honor)\"",
+                charName: "호스터 툴리 (Hoster Tully)",
+                charDesc: "리버런의 영주이자 툴리 가문의 수장. 동맹과 결혼을 통해 가문의 안위를 지키고자 헌신한 정치가입니다.",
+                vassalTitle: "프레이 가문 (House Frey) ➔ 대표 인물: 왈더 프레이",
+                vassalDesc: "리버랜드의 쌍둥이 성을 지키는 강력한 봉신 가문. 통행세를 징수하며 세력을 키웠으며, 수장 왈더 프레이는 기회주의적이고 탐욕스러운 인물입니다."
+            },
+            Baratheon: {
+                icon: "🦌", region: "스톰랜드 (The Stormlands)", house: "바라테온 가문 (House Baratheon)",
+                desc: "타르가르옌 왕조를 무너뜨린 로버트의 반란 이후, 전 대륙의 중심인 철왕좌를 차지했던 강인한 전사들의 가문입니다.",
+                motto: "가문 표어: \"맹렬한 우리 분노 (Ours is the Fury)\"",
+                charName: "로버트 바라테온 (Robert Baratheon)",
+                charDesc: "반란을 이끌어 칠왕국의 국왕이 된 인물. 과거 전장을 호령하던 최강의 전사였으나, 왕위에 오른 뒤 방탕한 생활을 이어갑니다.",
+                vassalTitle: "타스 가문 (House Tarth) ➔ 대표 인물: 브리엔 타스",
+                vassalDesc: "스톰랜드 사파이어 섬을 다스리는 유서 깊은 봉신. 가문원인 브리엔은 기사 이상의 충성심과 무력을 지닌 여전사입니다."
+            },
+            Greyjoy: {
+                icon: "🦑", region: "강철 군도 (Iron Islands)", house: "그레이조이 가문 (House Greyjoy)",
+                desc: "척박한 대륙 서쪽 섬들에 거주하며, 바다를 무대로 강력한 강철 함대를 이끌고 침략과 약탈을 일삼아 온 해양 가문입니다.",
+                motto: "가문 표어: \"우리는 씨를 뿌리지 않는다 (We Do Not Sow)\"",
+                charName: "발론 그레이조이 (Balon Greyjoy)",
+                charDesc: "강철 군도의 영주. 고대 방식의 약탈 전통을 부활시키고자 대륙을 향해 여러 번 반란을 일으킨 고집스럽고 냉혹한 수장입니다.",
+                vassalTitle: "할로우 가문 (House Harlaw) ➔ 대표 인물: 로드릭 할로우",
+                vassalDesc: "강철 군도 내에서 가장 비옥한 영지와 부를 지닌 거대 봉신 가문. 수장 로드릭은 독서를 즐겨 '책벌레'라 불리는 지략가입니다."
+            },
+            Martell: {
+                icon: "☀️", region: "도르네 (Dorne)", house: "마르텔 가문 (House Martell)",
+                desc: "웨스테로스 남단의 사막 지대를 다스리며, 타르가르옌의 드래곤 침공에도 유일하게 굴복하지 않고 독립성을 유지했던 가문입니다.",
+                motto: "가문 표어: \" 굴하지 않고, 꺾이지 않으며, 깨어지지 않는다 (Unbowed, Unbent, Unbroken)\"",
+                charName: "오베린 마르텔 (Oberyn Martell)",
+                charDesc: "도르네의 대공 마르텔의 동생이자 '붉은 독사'라 불리는 최고의 무술가. 치명적인 독과 창술을 다루며 가문의 원수를 갚으려 합니다.",
+                vassalTitle: "데이인 가문 (House Dayne) ➔ 대표 인물: 아서 데이인",
+                vassalDesc: "도르네 최강의 무력을 자랑하는 오랜 봉신. 가문의 전설적인 인물 아서 데이인은 '아침의 검'이라 불리며 웨스테로스 역사상 최고의 기사로 꼽힙니다."
+            },
+            Tyrell: {
+                icon: "🌹", region: "리치 (The Reach)", house: "티렐 가문 (House Tyrell)",
+                desc: "가장 넓고 비옥한 곡창지대를 점령하여 막대한 인구수와 풍요로운 식량 보급, 세련된 기사 문화를 자랑하는 풍요의 가문입니다.",
+                motto: "가문 표어: \"강성하게 자라나라 (Growing Strong)\"",
+                charName: "마르제리 티렐 (Margaery Tyrell)",
+                charDesc: "티렐 가문의 영애. 아름다운 외모와 뛰어난 사교성, 영리한 두뇌와 정치적 감각을 지녀 백성들의 사랑을 한몸에 받는 인물입니다.",
+                vassalTitle: "탈리 가문 (House Tarly) ➔ 대표 인물: 랜딜 탈리",
+                vassalDesc: "리치 지방 최강의 호전적인 기사 무력을 자랑하는 핵심 군사 봉신. 수장 랜딜 탈리는 가문 대대로 내려오는 대검을 쥐고 야전 사령관 역할을 전담합니다."
+            }
+        };
+
+        function viewDetails(houseKey) {
+            const data = westerosData[houseKey];
+            
+            // 1. 트리거 카드 시각 효과 전환
+            Object.keys(westerosData).forEach(k => {
+                const card = document.getElementById(`card-${k}`);
+                if (card) card.classList.remove('active-card');
+            });
+            const activeCard = document.getElementById(`card-${houseKey}`);
+            if (activeCard) activeCard.classList.add('active-card');
+
+            // 2. 우측 모니터에 데이터 계층 구조 매핑
+            document.getElementById('monitor-empty').classList.add('hidden');
+            const content = document.getElementById('monitor-content');
+            content.classList.remove('hidden');
+            
+            document.getElementById('m-icon').innerText = data.icon;
+            document.getElementById('m-region').innerText = data.region;
+            document.getElementById('m-house').innerText = data.house;
+            document.getElementById('m-desc').innerText = data.desc;
+            document.getElementById('m-motto').innerText = data.motto;
+            
+            document.getElementById('m-char-name').innerText = data.charName;
+            document.getElementById('m-char-desc').innerText = data.charDesc;
+            
+            document.getElementById('m-vassal-title').innerText = data.vassalTitle;
+            document.getElementById('m-vassal-desc').innerText = data.vassalDesc;
+
+            // 3. 실시간 변경 로그 출력
+            const consoleLog = document.getElementById('console-log');
+            const timestamp = new Date().toLocaleTimeString();
+            consoleLog.innerHTML += `<br><span class="text-amber-500">[${timestamp}] 계층 탐색: ${data.region} 선택됨</span>`;
+            consoleLog.innerHTML += `<br><span class="text-emerald-400"> ➔ 하위 바인딩: ${data.charName} / ${data.vassalTitle.split(' ➔ ')[0]} 로드 완료.</span>`;
+            
+            consoleLog.scrollTop = consoleLog.scrollHeight;
+        }
+    </script>
+</body>
+</html>
