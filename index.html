@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>웨스테로스 대륙 세력 및 봉신 가문 전체 계층도</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         @keyframes pulse-glow {
@@ -19,6 +20,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen font-sans flex flex-col justify-between">
 
+    <!-- 상단 헤더 -->
     <header class="bg-slate-900 border-b border-slate-800 p-6 text-center shadow-lg">
         <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-500 to-orange-500">
             웨스테로스 칠왕국 전체 세력 계층도
@@ -26,8 +28,10 @@
         <p class="text-slate-400 mt-2 text-sm">킹스랜딩 수도 및 가문별 지정 봉신·인물 상세 고증 시스템</p>
     </header>
 
+    <!-- 메인 컨텐츠 영역 -->
     <main class="max-w-7xl w-full mx-auto p-6 grid grid-cols-1 lg:grid-cols-4 gap-8 items-start my-auto">
         
+        <!-- 왼쪽: 가계도 트리 (3컬럼 차지) -->
         <div class="lg:col-span-3 bg-slate-900/60 border border-slate-800 rounded-2xl p-6 shadow-2xl">
             <h2 class="text-xl font-bold mb-6 flex items-center gap-2 text-amber-400">
                 <span>👑</span> Westeros Grand Tree (수도 및 지정 봉신 연동)
@@ -35,13 +39,16 @@
             
             <div class="flex flex-col items-center">
                 
+                <!-- [최상위 부모] 웨스테로스 대륙 -->
                 <div class="bg-slate-800 border-2 border-slate-600 rounded-xl p-3 w-64 text-center shadow-xl z-10">
                     <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-0.5">Root Continent</div>
                     <div class="text-lg font-black text-amber-400">웨스테로스 대륙</div>
                 </div>
 
+                <!-- 연결선 1 -->
                 <div class="w-0.5 h-4 bg-slate-700"></div>
 
+                <!-- [중심 계층] 칠왕국의 수도: 킹스랜딩 -->
                 <div class="z-10 flex flex-col items-center">
                     <button onclick="viewDetails('KingsLanding')" id="node-KingsLanding" class="w-72 bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-amber-600 hover:border-amber-400 rounded-xl p-3 text-center shadow-2xl transition-all cursor-pointer block">
                         <span class="text-[10px] font-bold text-amber-500 uppercase tracking-widest block mb-0.5">⭐ Capital of the Seven Kingdoms</span>
@@ -50,6 +57,7 @@
                         </span>
                     </button>
                     
+                    <!-- 킹스맨틀 직속 친위대: 킹스가드 배치 -->
                     <div class="mt-2">
                         <button onclick="viewDetails('Kingsguard')" id="node-Kingsguard" class="bg-slate-950 border border-amber-700/60 hover:border-amber-400 rounded-lg px-4 py-1 text-xs text-amber-300 font-bold transition-all cursor-pointer">
                             🛡️ 왕실 기사단: 킹스가드 (Kingsguard)
@@ -57,10 +65,13 @@
                     </div>
                 </div>
 
+                <!-- 연결선 2 -->
                 <div class="w-0.5 h-6 bg-slate-700"></div>
 
+                <!-- 대가문 및 요청 지정 봉신 그리드 배치 -->
                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 w-full pt-4 border-t border-slate-800">
                     
+                    <!-- 북부 -->
                     <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800/80">
                         <button onclick="viewDetails('Stark')" id="node-Stark" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500 rounded-lg p-2 text-left transition-all cursor-pointer">
                             <span class="text-xs font-bold text-blue-400 block">🛡️ 북부</span>
@@ -73,6 +84,7 @@
                         </div>
                     </div>
 
+                    <!-- 리버랜드 -->
                     <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800/80">
                         <button onclick="viewDetails('Tully')" id="node-Tully" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500 rounded-lg p-2 text-left transition-all cursor-pointer">
                             <span class="text-xs font-bold text-teal-400 block">🐟 리버랜드</span>
@@ -85,6 +97,7 @@
                         </div>
                     </div>
 
+                    <!-- 동부(베일) -->
                     <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800/80">
                         <button onclick="viewDetails('Arryn')" id="node-Arryn" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500 rounded-lg p-2 text-left transition-all cursor-pointer">
                             <span class="text-xs font-bold text-sky-400 block">🦅 동부 (베일)</span>
@@ -97,6 +110,7 @@
                         </div>
                     </div>
 
+                    <!-- 강철 군도 -->
                     <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800/80">
                         <button onclick="viewDetails('Greyjoy')" id="node-Greyjoy" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500 rounded-lg p-2 text-left transition-all cursor-pointer">
                             <span class="text-xs font-bold text-cyan-500 block">🦑 강철 군도</span>
@@ -108,6 +122,7 @@
                         </div>
                     </div>
 
+                    <!-- 서부(웨스터랜드) -->
                     <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800/80">
                         <button onclick="viewDetails('Lannister')" id="node-Lannister" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500 rounded-lg p-2 text-left transition-all cursor-pointer">
                             <span class="text-xs font-bold text-amber-500 block">🦁 서부 (웨스터랜드)</span>
@@ -120,6 +135,7 @@
                         </div>
                     </div>
 
+                    <!-- 국왕령 & 드래곤스톤 -->
                     <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800/80">
                         <button onclick="viewDetails('Targaryen')" id="node-Targaryen" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500 rounded-lg p-2 text-left transition-all cursor-pointer">
                             <span class="text-xs font-bold text-red-500 block">🐉 국왕령</span>
@@ -131,6 +147,7 @@
                         </div>
                     </div>
 
+                    <!-- 스톰랜드 -->
                     <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800/80">
                         <button onclick="viewDetails('Baratheon')" id="node-Baratheon" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500 rounded-lg p-2 text-left transition-all cursor-pointer">
                             <span class="text-xs font-bold text-yellow-500 block">🦌 스톰랜드</span>
@@ -143,6 +160,7 @@
                         </div>
                     </div>
 
+                    <!-- 남부(리치) -->
                     <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800/80">
                         <button onclick="viewDetails('Tyrell')" id="node-Tyrell" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500 rounded-lg p-2 text-left transition-all cursor-pointer">
                             <span class="text-xs font-bold text-green-500 block">🌹 남부 (리치)</span>
@@ -155,7 +173,9 @@
                         </div>
                     </div>
 
+                    <!-- 도르네 및 특수 세력 통합 칸 -->
                     <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800/80 space-y-3">
+                        <!-- 도르네 -->
                         <div>
                             <button onclick="viewDetails('Martell')" id="node-Martell" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500 rounded-lg p-2 text-left transition-all cursor-pointer">
                                 <span class="text-xs font-bold text-orange-400 block">☀️ 도르네</span>
@@ -166,6 +186,7 @@
                             </div>
                         </div>
 
+                        <!-- 장벽 너머 및 밤의 경비대 -->
                         <div class="border-t border-slate-800 pt-2 space-y-2">
                             <button onclick="viewDetails('NightWatch')" id="node-NightWatch" class="w-full bg-slate-950 border border-dashed border-slate-700 hover:border-slate-400 rounded-lg p-2 text-left transition-all cursor-pointer">
                                 <span class="text-[11px] font-bold text-slate-400 block">❄️ 장벽 방어 군단</span>
@@ -182,18 +203,21 @@
             </div>
         </div>
 
+        <!-- 오른쪽: 계층 구조 상세 정보 뷰어 -->
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-2xl flex flex-col h-[550px]">
             <h2 class="text-lg font-bold mb-3 flex items-center gap-2 text-amber-500">
                 <span>⚔️</span> Lineage Detail View
             </h2>
             
             <div id="monitor-view" class="bg-slate-950 rounded-xl p-4 flex-1 border border-slate-950 flex flex-col justify-start overflow-y-auto text-left">
+                <!-- 대기 화면 -->
                 <div id="monitor-empty" class="h-full flex flex-col justify-center items-center text-center text-slate-600">
                     <div class="text-4xl mb-2">🏰</div>
                     <div class="text-sm font-semibold">세력 또는 가문 선택</div>
                     <div class="text-xs text-slate-500 mt-1">좌측 노드를 클릭하면 수도 정보 및 가문 고증 정보가 출력됩니다.</div>
                 </div>
                 
+                <!-- 상세 내용 바인딩 패널 -->
                 <div id="monitor-content" class="hidden space-y-4">
                     <div>
                         <span id="m-type" class="text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wide"></span>
@@ -214,6 +238,7 @@
                 </div>
             </div>
 
+            <!-- 하단 로그 기록기 -->
             <div class="mt-3">
                 <div id="console-log" class="bg-black/40 border border-slate-950 rounded-lg p-2 font-mono text-[10px] text-green-400 h-14 overflow-y-auto">
                     &gt; 시스템 초기화 완료.<br>정밀 고증 데이터 로드 완료.
@@ -223,10 +248,12 @@
 
     </main>
 
+    <!-- 하단 푸터 -->
     <footer class="bg-slate-950 border-t border-slate-900 p-4 text-center text-xs text-slate-600">
         얼음과 불의 노래: 웨스테로스 대륙 전 세력 연동 시뮬레이터
     </footer>
 
+    <!-- 자바스크립트 정밀 데이터 구조 -->
     <script>
         // ==========================================================
         // [OOP 요구사항] 다형성 구현을 위한 클래스 계층 설계 영역
@@ -238,54 +265,61 @@
         class StarkHouse extends WesterosNode {
             calculateMobilization() {
                 return Math.random() > 0.5 
-                    ? `❄️ "겨울이 오고 있다" - 혹독한 한파로 수송 제한. 징집병 15,000명 소집 (평시 대비 50% 감소).` 
-                    : `🐺 "겨울이 오고 있다" - 북부 영주들의 결집 완료. 정예 북부군 30,000명 소집 완료.`;
+                    ? `- 혹독한 한파로 수송 제한. 징집병 15,000명 소집 (평시 대비 50% 감소).` 
+                    : `- 북부 영주들의 결집 완료. 정예 북부군 30,000명 소집 완료.`;
+            }
+        }
+        class TullyHouse extends WesterosNode {
+            calculateMobilization() {
+                return Math.random() > 0.4
+                    ? `- 삼면강 평야 지대의 풍부한 곡창 기반 확충! 군량 자원 8,000석 및 보급마차 선제 고정 확보.`
+                    : `- 리버랜드 사방 평야 지대의 지리적 노출로 인해, 방어 군량 분산 배치령 하달.`;
             }
         }
         class LannisterHouse extends WesterosNode {
-            calculateMobilization() { return `🦁 "내 포효를 들으라" - 서부 캐스터리 록 금광에서 자금 5,000 드래곤 고정 확충. (상비군 35,000명)`; }
+            calculateMobilization() { return `- 서부 캐스터리 록 금광에서 자금 5,000 드래곤 금화 고정 확충. (상비군 35,000명)`; }
         }
         class TargaryenHouse extends WesterosNode {
-            calculateMobilization() { return `🔥 "불과 피" - 전설적인 드래곤 "발레리온"의 화력 측정 완료. 공성 전투력 공정 고정치 +9,999 포인트 가산.`; }
+            calculateMobilization() { return `- 전설적인 드래곤 "발레리온"의 화력 측정 완료. 공성 전투력 공정 고정치 +9,999 포인트 가산.`; }
         }
         class GreyjoyHouse extends WesterosNode {
             calculateMobilization() {
                 return Math.random() > 0.4 
-                    ? `🌊 "우리는 씨를 뿌리지 않는다" - 리버랜드 연안 기습 성공! 군자금 +1,500 및 군량 자원 약탈.` 
-                    : `❌ "우리는 씨를 뿌리지 않는다" - 관군의 강력한 해안 방어선에 가로막혀 수확 없이 회군.`;
+                    ? `- 리버랜드 연안 기습 성공! 군자금 +1,500 및 군량 자원 약탈.` 
+                    : `- 관군의 강력한 해안 방어선에 가로막혀 수확 없이 회군.`;
             }
         }
         class TyrellHouse extends WesterosNode {
-            calculateMobilization() { return `🌹 "강하게 자라리" - 하이 가든의 비옥한 영지에서 보급식량 10,000 가마 고정 보급 완료.`; }
+            calculateMobilization() { return `- 하이 가든의 비옥한 영지에서 보급식량 10,000 가마 고정 보급 완료.`; }
         }
         class BaratheonHouse extends WesterosNode {
             calculateMobilization() {
                 return Math.random() > 0.5 
-                    ? `⚡ "맹세코 분노하리" - 스톰랜드 폭풍우로 행군 속도 70% 저하. 성채 방어 효율 가산.` 
-                    : `🦌 "맹세코 분노하리" - 기상 확보 완료. 중갑 기병대 20,000명 정상 출정.`;
+                    ? `- 스톰랜드 폭풍우로 행군 속도 70% 저하. 성채 방어 효율 가산.` 
+                    : `- 기상 확보 완료. 중갑 기병대 20,000명 정상 출정.`;
             }
         }
         class ArrynHouse extends WesterosNode {
-            calculateMobilization() { return `🦅 "고결하게 성장하리" - 하늘에 닿은 이어리 성채 방어 수치가 고정적으로 200% 증폭 유지.`; }
+            calculateMobilization() { return `- 하늘에 닿은 이어리 성채 방어 수치가 고정적으로 200% 증폭 유지.`; }
         }
         class MartellHouse extends WesterosNode {
             calculateMobilization() {
                 return Math.random() > 0.3 
-                    ? `☀️ "굽히지 않고, 휘지 않고, 꺾이지 않으리" - 적군이 사막 모래폭풍에 갇혀 병력 30% 자멸.` 
-                    : `🏜️ "굽히지 않고, 휘지 않고, 꺾이지 않으리" - 전선 소강상태. 도르네 창병대 국경 유지.`;
+                    ? `- 적군이 사막 모래폭풍에 갇혀 병력 30% 자멸.` 
+                    : `- 전선 소강상태. 도르네 창병대 국경 유지.`;
             }
         }
         class NightWatchHouse extends WesterosNode {
             calculateMobilization() {
                 const recruits = Math.floor(Math.random() * 80) + 20;
-                return `❄️ "나는 어둠 속의 검이다" - 칠왕국 전역에서 가변 신병 ${recruits}명이 도착하여 장벽에 편입됨.`;
+                return `- 칠왕국 전역에서 가변 신병 ${recruits}명이 도착하여 장벽에 편입됨.`;
             }
         }
         class WildlingsHouse extends WesterosNode {
             calculateMobilization() {
                 return Math.random() > 0.6 
-                    ? `🏹 자유민 정찰조가 장벽을 몰래 넘어 남쪽 가문의 보급선을 기습했습니다. 군량 +500 확보.` 
-                    : `🛡️ 밤의 경비대 순찰조에게 발각되어 장벽 북쪽 영역으로 패퇴했습니다.`;
+                    ? `- 자유민 정찰조가 장벽을 몰래 넘어 남쪽 가문의 보급선을 기습했습니다. 군량 +500 확보.` 
+                    : `- 밤의 경비대 순찰조에게 발각되어 장벽 북쪽 영역으로 패퇴했습니다.`;
             }
         }
 
@@ -293,6 +327,7 @@
         function getFactionInstance(key, name) {
             switch(key) {
                 case 'Stark': return new StarkHouse(name);
+                case 'Tully': return new TullyHouse(name);
                 case 'Lannister': return new LannisterHouse(name);
                 case 'Targaryen': return new TargaryenHouse(name);
                 case 'Greyjoy': return new GreyjoyHouse(name);
@@ -320,7 +355,7 @@
                 type: "왕실 기사단",
                 title: "킹스가드 (Kingsguard)",
                 motto: "\"평생을 바쳐 국왕과 왕실을 수호한다\"",
-                desc: "국왕의 신변 보호를 영혼의 서약으로 삼는 7인의 정예 기사단입니다. 백색의 갑옷과 망토를 입어 '백색 기사단'으로 불리며, 결혼, 영토 소유, 가문 상속권을 전면 포기하고 오직 국왕만을 위해 칼을 휘두르는 명예의 최정점 집단입니다.",
+                desc: "국왕의 신변 보호를 영혼의 서약으로 삼는 7인의 정예 기사단입니다. 백색의 갑옷 and 망토를 입어 '백색 기사단'으로 불리며, 결혼, 영토 소유, 가문 상속권을 전면 포기하고 오직 국왕만을 위해 칼을 휘두르는 명예의 최정점 집단입니다.",
                 leader: "기사단장 바리스탄 셀미 (Barristan Selmy)",
                 leaderDesc: "'노장 바리스탄'이라 불리는 대륙 역사상 가장 위대하고 명예로운 전설적 기사입니다. 수많은 전장에서 공적을 세웠으며, 왕조가 바뀐 뒤에도 오직 국왕을 지키는 킹스가드의 본분을 지키며 기사단의 기둥 역할을 맡고 있습니다."
             },
@@ -372,7 +407,7 @@
                 leader: "오베린 마르텔 (Oberyn Martell)", leaderDesc: "'붉은 독사'라 불리는 최고의 창술 무술가. 치명적인 독을 다루며 가문의 원수인 라니스터 가문에 피의 복수를 계획하는 인물입니다."
             },
 
-            // --- 북부 봉신 가문 (상세화) ---
+            // --- 북부 봉신 가문 ---
             Mormont: { 
                 type: "북부 봉신", title: "모르몬트 가문 (House Mormont)", motto: "\"여기 우리가 서 있다 (Here We Stand)\"", 
                 desc: "척박한 북부 곰 섬의 영주. 영지 사정상 남녀를 가리지 않고 도끼를 들고 정예 전사로 훈련받으며, 대대로 스타크 가문에 절대적이고 맹목적인 충성심을 바쳐 온 신의의 가문입니다.", 
@@ -390,7 +425,7 @@
                 leader: "루스 볼튼 (Roose Bolton)", leaderDesc: "얼음처럼 차가운 창백한 눈동자를 지녔으며 목소리가 속삭이듯 낮고 조용합니다. 감정을 전혀 내비치지 않은 채 뒤에서 가문의 이익을 위해 철저하게 배신을 계산하는 섬뜩한 기회주의자입니다."
             },
 
-            // --- 리버랜드 봉신 가문 (상세화) ---
+            // --- 리버랜드 봉신 가문 ---
             Mallister: { 
                 type: "리버랜드 봉신", title: "말리스터 가문 (House Mallister)", motto: "\"모든 것들 위에 (Above the Rest)\"", 
                 desc: "서쪽 해안가 시가드 성의 주인. 강철 군도 약탈자들의 오랜 침략 역사를 온몸으로 받아내며 해안 방파제 역할을 해왔기에, 해상 방어 기사단 능력이 타의 추종을 불허합니다.", 
@@ -407,7 +442,7 @@
                 leader: "왈더 프레이 (Walder Frey)", leaderDesc: "90세가 넘은 징글징글하게 오래 살고 있는 가문의 수장입니다. 수많은 아내와 방대한 자손을 두었으며, 자존심에 상처를 준 적에게는 상상을 초월하는 비열하고 잔혹한 뒤통수를 설계하는 노회하고 음험한 성격입니다."
             },
 
-            // --- 동부(베일) 봉신 가문 (지정 가문 및 상세화) ---
+            // --- 동부(베일) 봉신 가문 ---
             Royce: { 
                 type: "동부(베일) 봉신", title: "로이스 가문 (House Royce)", motto: "\"우리는 기억한다 (We Remember)\"", 
                 desc: "룬스톤의 영주 가문. 베일 지역 내에서 대가문인 아린 가문 다음가는 압도적인 세력과 군사력을 지녔으며, 고대 퍼스트 맨의 마법 문양이 새겨진 청동 갑옷을 대대로 물려받는 유서 깊은 강가입니다.", 
@@ -424,7 +459,7 @@
                 leader: "피터 베일리쉬 (Petyr Baelish)", leaderDesc: "'리틀핑거'라는 멸칭이자 이명을 지닌 대륙 최고의 모략가입니다. 현재 철왕좌의 재무관으로 활동하며 돈줄을 통제하고 있으며, 겉으로는 누구에게나 부드럽게 웃어주지만 뒤에서는 왕국 전체를 거대한 혼돈의 도가니로 몰아넣는 소름 돋는 지략가입니다."
             },
 
-            // --- 강철군도 봉신 가문 (지정 가문 및 상세화) ---
+            // --- 강철군도 봉신 가문 ---
             Harlaw: { 
                 type: "강철군도 봉신", title: "할로우 가문 (House Harlaw)", motto: "공식 표어 없음", 
                 desc: "할로우 섬의 지배자. 강철 군도 전체에서 가장 비옥한 영지와 최대 규모의 인구 및 무역항을 보유하고 있어, 경제력과 실질적 군사 동원력 면에서는 대가문인 그레이조이를 능가하는 2인자 세력입니다.", 
@@ -436,7 +471,7 @@
                 leader: "사우어 프렌 (Sawane Botley)", leaderDesc: "비록 척박한 섬 출신이지만 유연한 정세 판단력을 가졌으며, 무모한 반란보다는 가문의 안정과 영지 상인 기득권 보호를 우선시하는 현실주의적 선장입니다."
             },
 
-            // --- 서부(웨스터랜드) 봉신 가문 (지정 가문 및 상세화) ---
+            // --- 서부(웨스터랜드) 봉신 가문 ---
             Westerling: { 
                 type: "서부 봉신", title: "웨스털링 가문 (House Westerling)", motto: "\"단 하나뿐인 명예 (Honor, Not Honors)\"", 
                 desc: "크랙 성의 영주. 과거에는 서부의 강력한 선왕 계열 가문이었으나, 금광이 고갈되면서 현재는 가세가 크게 기울어 명예와 오래된 가문 타이틀 신용도만을 간신히 유지하고 있는 몰락 귀족 가문입니다.", 
@@ -465,7 +500,7 @@
                 leader: "몬포드 벨라리온 (Monford Velaryon)", leaderDesc: "수려한 은발을 가진 정통 해상 가문의 가주입니다. 왕조가 바뀐 현재도 해양 지배권을 단단히 쥐고 자존심을 유지하는 베테랑 제독입니다."
             },
 
-            // --- 스톰랜드 봉신 가문 (지정 가문 및 상세화) ---
+            // --- 스톰랜드 봉신 가문 ---
             Tarth: { 
                 type: "스톰랜드 봉신", title: "타스 가문 (House Tarth)", motto: "공식 표어 없음", 
                 desc: "아름다운 에메랄드빛 바다로 둘러싸인 '타스 섬'의 영주 가문입니다. 대대로 신의가 두텁고 강력한 중갑 무장 기사들을 거느려 스톰랜드 국경선에서 굳건하게 방패가 되어 준 신뢰의 영지입니다.", 
@@ -479,10 +514,10 @@
             Seaworth: { 
                 type: "스톰랜드 봉신", title: "시워스 가문 (House Seaworth)", motto: "공식 표어 없음", 
                 desc: "로버트의 반란 시절 포위당해 굶어 죽어가던 스톰즈 엔드 성에 밀선으로 양파와 생선을 보급해 왕국을 구하며 기사 작위를 받은 신생 영지 가문입니다. 뼈대 깊은 귀족들에게는 은근한 무시를 당합니다.", 
-                leader: "다보스 시워스 (Davos Seaworth)", leaderDesc: "'양파 기사'라는 별명을 가진 과거 악명 높은 밀수꾼 출신 기사입니다. 밀수 죄값으로 손가락 마디가 잘렸으나 이를 목걸이로 걸고 다니며, 왕족들에게 유일하게 아첨하지 않고 진실된 충언과 헌신을 쏟아붓는 대륙 제일의 양심적 참모입니다."
+                leader: "다보스 시워스 (Davos Seaworth)", leaderDesc: "\"양파 기사\"라는 별명을 가진 과거 악명 높은 밀수꾼 출신 기사입니다. 밀수 죄값으로 손가락 마디가 잘렸으나 이를 목걸이로 걸고 다니며, 왕족들에게 유일하게 아첨하지 않고 진실된 충언과 헌신을 쏟아붓는 대륙 제일의 양심적 참모입니다."
             },
 
-            // --- 남부(리치) 봉신 가문 (지정 가문 및 상세화) ---
+            // --- 남부(리치) 봉신 가문 ---
             Tarly: { 
                 type: "남부(리치) 봉신", title: "탈리 가문 (House Tarly)", motto: "\"선봉(First in Battle)\"", 
                 desc: "혼 힐의 영주 가문. 리치 지방 전체에서 가장 호전적이고 군사 훈련도가 완벽한 정예 육군 기사단을 보유하고 있으며, 가문의 가보로 발리리아 강철 대검 '하트베인'을 소유한 서슬 퍼런 무가입니다.", 
@@ -496,14 +531,14 @@
             Hightower: { 
                 type: "남부(리치) 봉신", title: "하이타워 가문 (House Hightower)", motto: "\"우리는 길을 밝힌다 (We light the way)\"", 
                 desc: "대도시 올드타운의 지배자. 왕국에서 가장 높은 상징탑인 '하이타워'를 기점으로 마이스터 대학사들의 총본산 시타델을 후원하며, 대가문 급의 대규모 군대와 역사를 간직한 최고 품격의 대귀족 가문입니다.", 
-                leader: "제럴드 하이타워 (Gerold Hightower)", leaderDesc: "'하얀 황소(White Bull)'라는 별명을 지닌 전설적인 전임 킹스가드 기사단장입니다. 바위 같은 체구와 흔들리지 않는 충성심으로 타르가르옌 왕가를 보좌했던 기사들의 진정한 대선배이자 우상 같은 인물입니다."
+                leader: "제럴드 하이타워 (Gerold Hightower)", leaderDesc: "\"하얀 황소(White Bull)\"라는 별명을 지닌 전임 킹스가드 기사단장입니다. 바위 같은 체구와 흔들리지 않는 충성심으로 타르가르옌 왕가를 보좌했던 기사들의 진정한 대선배이자 우상 같은 인물입니다."
             },
 
-            // --- 도르네 봉신 가문 (지정 가문 및 상세화) ---
+            // --- 도르네 봉신 가문 ---
             Dayne: { 
                 type: "도르네 봉신", title: "데인 가문 (House Dayne)", motto: "공식 표어 없음", 
                 desc: "스타폴의 영주 가문. 우주에서 떨어진 별의 파편(운석)을 제련해 만든 유일무이한 백색 대검 '새벽(Dawn)'을 보관하고 있으며, 가문 내 최고의 실력자에게만 '아침의 검'이라는 명예 호칭과 함께 대검을 인계하는 무술의 명가입니다.", 
-                leader: "아서 데인 (Arthur Dayne)", leaderDesc: "'아침의 검' 왕실 친위대 기사. 쌍검과 대검을 마법처럼 휘두르며 에다드 스타크를 포함한 북부 최고의 전사 7명을 홀로 압도했던 대륙 역사상 적수가 없는 최강의 무신이자, 기사도의 최고 존엄입니다."
+                leader: "아서 데인 (Arthur Dayne)", leaderDesc: "\"아침의 검\" 왕실 친위대 기사. 쌍검과 대검을 마법처럼 휘두르며 에다드 스타크를 포함한 북부 최고의 전사 7명을 홀로 압도했던 대륙 역사상 적수가 없는 최강의 무신이자, 기사도의 최고 존엄입니다."
             },
 
             // --- 장벽 특수 독립 세력 ---
@@ -558,7 +593,7 @@
             document.getElementById('m-leader').innerText = data.leader;
             document.getElementById('m-leader-desc').innerText = data.leaderDesc;
 
-            // 3. [다형성 연동 핵심] 인스턴스를 만들고 오버라이딩된 다형성 계산 메서드 실행
+            // 3. 인스턴스를 만들고 오버라이딩된 다형성 계산 메서드 실행
             const factionInstance = getFactionInstance(key, data.title);
             const mobilizationResult = factionInstance.calculateMobilization();
 
