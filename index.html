@@ -25,16 +25,16 @@
         <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-500 to-orange-500">
             웨스테로스 칠왕국 전체 세력 계층도
         </h1>
-        <p class="text-slate-400 mt-2 text-sm">킹스랜딩 수도 중심의 전 세력 및 하위 봉신 가문 매핑 시스템</p>
+        <p class="text-slate-400 mt-2 text-sm">킹스랜딩 수도 및 가문별 지정 봉신·인물 상세 고증 시스템</p>
     </header>
 
     <!-- 메인 컨텐츠 영역 -->
     <main class="max-w-7xl w-full mx-auto p-6 grid grid-cols-1 lg:grid-cols-4 gap-8 items-start my-auto">
         
-        <!-- 왼쪽: 킹스랜딩 중심의 가계도 트리 (3컬럼 차지) -->
+        <!-- 왼쪽: 가계도 트리 (3컬럼 차지) -->
         <div class="lg:col-span-3 bg-slate-900/60 border border-slate-800 rounded-2xl p-6 shadow-2xl">
             <h2 class="text-xl font-bold mb-6 flex items-center gap-2 text-amber-400">
-                <span>👑</span> Westeros Grand Tree (수도 연동 가계도)
+                <span>👑</span> Westeros Grand Tree (수도 및 지정 봉신 연동)
             </h2>
             
             <div class="flex flex-col items-center">
@@ -48,23 +48,30 @@
                 <!-- 연결선 1 -->
                 <div class="w-0.5 h-4 bg-slate-700"></div>
 
-                <!-- [새로운 중심 계층] 칠왕국의 수도: 킹스랜딩 -->
-                <div class="z-10">
+                <!-- [중심 계층] 칠왕국의 수도: 킹스랜딩 -->
+                <div class="z-10 flex flex-col items-center">
                     <button onclick="viewDetails('KingsLanding')" id="node-KingsLanding" class="w-72 bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-amber-600 hover:border-amber-400 rounded-xl p-3 text-center shadow-2xl transition-all cursor-pointer block">
                         <span class="text-[10px] font-bold text-amber-500 uppercase tracking-widest block mb-0.5">⭐ Capital of the Seven Kingdoms</span>
                         <span class="text-xl font-black text-slate-100 flex justify-center items-center gap-1.5">
                             🏰 킹스랜딩 (King's Landing)
                         </span>
                     </button>
+                    
+                    <!-- 킹스맨틀 직속 친위대: 킹스가드 배치 -->
+                    <div class="mt-2">
+                        <button onclick="viewDetails('Kingsguard')" id="node-Kingsguard" class="bg-slate-950 border border-amber-700/60 hover:border-amber-400 rounded-lg px-4 py-1 text-xs text-amber-300 font-bold transition-all cursor-pointer">
+                            🛡️ 왕실 직속 기사단: 킹스가드 (Kingsguard)
+                        </button>
+                    </div>
                 </div>
 
                 <!-- 연결선 2 -->
                 <div class="w-0.5 h-6 bg-slate-700"></div>
 
-                <!-- 10대 세력 그리드 배치 (숫자 제거 및 방위 통일 버전) -->
+                <!-- 대가문 및 요청 지정 봉신 그리드 배치 -->
                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 w-full pt-4 border-t border-slate-800">
                     
-                    <!-- 북부 -->
+                    <!-- 북부 (그대로 유지) -->
                     <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800/80">
                         <button onclick="viewDetails('Stark')" id="node-Stark" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500 rounded-lg p-2 text-left transition-all cursor-pointer">
                             <span class="text-xs font-bold text-blue-400 block">🛡️ 북부</span>
@@ -77,7 +84,7 @@
                         </div>
                     </div>
 
-                    <!-- 리버랜드 -->
+                    <!-- 리버랜드 (그대로 유지) -->
                     <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800/80">
                         <button onclick="viewDetails('Tully')" id="node-Tully" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500 rounded-lg p-2 text-left transition-all cursor-pointer">
                             <span class="text-xs font-bold text-teal-400 block">🐟 리버랜드</span>
@@ -90,40 +97,41 @@
                         </div>
                     </div>
 
-                    <!-- 동부(베일) -->
+                    <!-- 동부(베일) (지정 가문 변경) -->
                     <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800/80">
                         <button onclick="viewDetails('Arryn')" id="node-Arryn" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500 rounded-lg p-2 text-left transition-all cursor-pointer">
                             <span class="text-xs font-bold text-sky-400 block">🦅 동부 (베일)</span>
                             <span class="text-base font-black text-slate-200">아린 가문</span>
                         </button>
                         <div class="mt-2 pl-3 border-l-2 border-slate-700 space-y-1 text-left">
-                            <button onclick="viewDetails('Royce')" id="node-Royce" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">├─ 🪨 로이스 가문</button>
-                            <button onclick="viewDetails('Waynwood')" id="node-Waynwood" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">└─ 🟢 웨인우드 가문</button>
+                            <button onclick="viewDetails('Royce')" id="node-Royce" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">├─ 🪨 로이스 가문 (욘 로이스)</button>
+                            <button onclick="viewDetails('Corbray')" id="node-Corbray" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">├─ 🗡️ 코브레이 가문 (라이오넬)</button>
+                            <button onclick="viewDetails('Baelish')" id="node-Baelish" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">└─ 🐦 베일리쉬 가문 (피터)</button>
                         </div>
                     </div>
 
-                    <!-- 강철 군도 -->
+                    <!-- 강철 군도 (지정 가문 변경) -->
                     <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800/80">
                         <button onclick="viewDetails('Greyjoy')" id="node-Greyjoy" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500 rounded-lg p-2 text-left transition-all cursor-pointer">
                             <span class="text-xs font-bold text-cyan-500 block">🦑 강철 군도</span>
                             <span class="text-base font-black text-slate-200">그레이조이 가문</span>
                         </button>
                         <div class="mt-2 pl-3 border-l-2 border-slate-700 space-y-1 text-left">
-                            <button onclick="viewDetails('Harlaw')" id="node-Harlaw" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">├─ 🗡️ 할로우 가문</button>
-                            <button onclick="viewDetails('Drumm')" id="node-Drumm" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">└─ 🦴 드럼 가문</button>
+                            <button onclick="viewDetails('Harlaw')" id="node-Harlaw" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">├─ 🗡️ 할로우 가문 (로드릭)</button>
+                            <button onclick="viewDetails('Botley')" id="node-Botley" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">└─ ⚓ 보틀리 가문 (트리스토퍼)</button>
                         </div>
                     </div>
 
-                    <!-- 서부(웨스터랜드) -->
+                    <!-- 서부(웨스터랜드) (지정 가문 변경) -->
                     <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800/80">
                         <button onclick="viewDetails('Lannister')" id="node-Lannister" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500 rounded-lg p-2 text-left transition-all cursor-pointer">
                             <span class="text-xs font-bold text-amber-500 block">🦁 서부 (웨스터랜드)</span>
                             <span class="text-base font-black text-slate-200">라니스터 가문</span>
                         </button>
                         <div class="mt-2 pl-3 border-l-2 border-slate-700 space-y-1 text-left">
-                            <button onclick="viewDetails('Crakehall')" id="node-Crakehall" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">├─ 🐗 크레이크홀 가문</button>
-                            <button onclick="viewDetails('Marbrand')" id="node-Marbrand" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">├─ 🔥 마르브랜드 가문</button>
-                            <button onclick="viewDetails('Clegane')" id="node-Clegane" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">└─ 🐕 클레가인 가문</button>
+                            <button onclick="viewDetails('Westerling')" id="node-Westerling" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">├─ 🐚 웨스털링 가문</button>
+                            <button onclick="viewDetails('Payne')" id="node-Payne" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">├─ 🪙 페인 가문</button>
+                            <button onclick="viewDetails('Clegane')" id="node-Clegane" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">└─ 🐕 클리게인 가문</button>
                         </div>
                     </div>
 
@@ -139,31 +147,33 @@
                         </div>
                     </div>
 
-                    <!-- 스톰랜드 -->
+                    <!-- 스톰랜드 (지정 가문 변경) -->
                     <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800/80">
                         <button onclick="viewDetails('Baratheon')" id="node-Baratheon" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500 rounded-lg p-2 text-left transition-all cursor-pointer">
                             <span class="text-xs font-bold text-yellow-500 block">🦌 스톰랜드</span>
                             <span class="text-base font-black text-slate-200">바라테온 가문</span>
                         </button>
                         <div class="mt-2 pl-3 border-l-2 border-slate-700 space-y-1 text-left">
-                            <button onclick="viewDetails('Tarth')" id="node-Tarth" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">├─ 💎 타스 가문</button>
-                            <button onclick="viewDetails('Dondarrion')" id="node-Dondarrion" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">└─ ⚡ 돈다리온 가문</button>
+                            <button onclick="viewDetails('Tarth')" id="node-Tarth" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">├─ 💎 타스 가문 (브리엔느)</button>
+                            <button onclick="viewDetails('Swann')" id="node-Swann" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">├─ 🦢 스완 가문 (발론)</button>
+                            <button onclick="viewDetails('Seaworth')" id="node-Seaworth" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">└─ 🧅 시워스 가문 (다보스)</button>
                         </div>
                     </div>
 
-                    <!-- 남부(리치) -->
+                    <!-- 남부(리치) (지정 가문 변경) -->
                     <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800/80">
                         <button onclick="viewDetails('Tyrell')" id="node-Tyrell" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500 rounded-lg p-2 text-left transition-all cursor-pointer">
                             <span class="text-xs font-bold text-green-500 block">🌹 남부 (리치)</span>
                             <span class="text-base font-black text-slate-200">티렐 가문</span>
                         </button>
                         <div class="mt-2 pl-3 border-l-2 border-slate-700 space-y-1 text-left">
-                            <button onclick="viewDetails('Tarly')" id="node-Tarly" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">├─ 🏹 탈리 가문</button>
-                            <button onclick="viewDetails('Hightower')" id="node-Hightower" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">└─ 🗼 하이타워 가문</button>
+                            <button onclick="viewDetails('Tarly')" id="node-Tarly" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">├─ 🏹 탈리 가문 (랜딜 탈리)</button>
+                            <button onclick="viewDetails('Redwyne')" id="node-Redwyne" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">├─ 🍇 레드와인 가문 (팍스터)</button>
+                            <button onclick="viewDetails('Hightower')" id="node-Hightower" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">└─ 🗼 하이타워 가문 (제럴드)</button>
                         </div>
                     </div>
 
-                    <!-- 도르네 및 특수 세력 통합 칸 -->
+                    <!-- 도르네 및 특수 세력 통합 칸 (지정 가문 변경) -->
                     <div class="bg-slate-900/40 p-3 rounded-xl border border-slate-800/80 space-y-3">
                         <!-- 도르네 -->
                         <div>
@@ -172,7 +182,7 @@
                                 <span class="text-base font-black text-slate-200">마르텔 가문</span>
                             </button>
                             <div class="mt-1 pl-3 border-l-2 border-slate-700 text-left">
-                                <button onclick="viewDetails('Dayne')" id="node-Dayne" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">└─ ⚔️ 데이인 가문</button>
+                                <button onclick="viewDetails('Dayne')" id="node-Dayne" class="text-xs text-slate-400 hover:text-amber-400 block cursor-pointer py-0.5">└─ ⚔️ 데인 가문 (아서 데인)</button>
                             </div>
                         </div>
 
@@ -221,7 +231,7 @@
                     </div>
 
                     <div class="bg-slate-900 p-3 rounded-lg border border-slate-800">
-                        <div class="text-xs font-bold text-emerald-400 mb-1">👤 대표자 / 통치 가문</div>
+                        <div class="text-xs font-bold text-emerald-400 mb-1">👤 대표자 / 통치 인물</div>
                         <div id="m-leader" class="text-sm font-bold text-slate-200"></div>
                         <p id="m-leader-desc" class="text-xs text-slate-400 mt-1 leading-relaxed"></p>
                     </div>
@@ -231,7 +241,7 @@
             <!-- 하단 로그 기록기 -->
             <div class="mt-3">
                 <div id="console-log" class="bg-black/40 border border-slate-950 rounded-lg p-2 font-mono text-[10px] text-green-400 h-14 overflow-y-auto">
-                    > 시스템 초기화 완료. 킹스랜딩 수도 중심 계층 연동 완료.
+                    > 시스템 초기화 완료. 정밀 고증 데이터 로드 완료.
                 </div>
             </div>
         </div>
@@ -243,10 +253,10 @@
         얼음과 불의 노래: 웨스테로스 대륙 전 세력 연동 시뮬레이터
     </footer>
 
-    <!-- 자바스크립트 데이터 구조 (킹스랜딩 데이터 추가 완료) -->
+    <!-- 자바스크립트 정밀 데이터 구조 -->
     <script>
         const hierarchyData = {
-            // --- [신규 추가] 수도 킹스랜딩 데이터 ---
+            // --- 수도 및 왕실 특수 조직 ---
             KingsLanding: {
                 type: "칠왕국 최고 수도", 
                 title: "킹스랜딩 (King's Landing)", 
@@ -254,6 +264,14 @@
                 desc: "웨스테로스 대륙 전체를 다스리는 최고 통치 기구이자 칠왕국의 도읍입니다. 대륙 동해안 국왕령 구역에 위치하며, 대정복자 아에곤 타르가르옌이 처음 대륙에 상륙한 장소에 세워진 거대 요새 도시이자 정치의 핵심입니다.",
                 leader: "국왕 로버트 바라테온 & 바라테온 왕가", 
                 leaderDesc: "현재 철왕좌를 차지하고 있는 칠왕국의 지배자입니다. 과거 미친 왕 아에리스 2세를 축출하는 반란을 이끌어 승리한 후, 바라테온 가문을 중심으로 국왕령과 킹스랜딩을 직속 통제하고 있습니다."
+            },
+            Kingsguard: {
+                type: "왕실 직속 정예 기사단",
+                title: "킹스가드 (Kingsguard)",
+                motto: "\"평생을 바쳐 국왕과 왕실을 수호한다\"",
+                desc: "국왕의 신변 보호를 영혼의 서약으로 삼는 7인의 정예 기사단입니다. 백색의 갑옷과 망토를 입어 '백색 기사단'으로 불리며, 결혼, 영토 소유, 가문 상속권을 전면 포기하고 오직 국왕만을 위해 칼을 휘두르는 명예의 최정점 집단입니다.",
+                leader: "기사단장 바리스탄 셀미 (Barristan Selmy)",
+                leaderDesc: "'노장 바리스탄'이라 불리는 대륙 역사상 가장 위대하고 명예로운 전설적 기사입니다. 수많은 전장에서 무쌍을 찍었으며, 왕조가 바뀐 뒤에도 오직 국왕을 지키는 킹스가드의 본분을 지키며 기사단의 기둥 역할을 맡고 있습니다."
             },
 
             // --- 각 지역 대가문 데이터 ---
@@ -264,7 +282,7 @@
             },
             Tully: {
                 type: "리버랜드 대가문", title: "툴리 가문 (House Tully)", motto: "\"가족, 의무, 명예 (Family, Duty, Honor)\"",
-                desc: "리버랜드 삼면강 유역의 비옥한 평야를 다스립니다. 지리적 요충지에 위치하여 사방이 뚫려있어 역사적으로 수많은 전란을 겪었으며 외교력이 뛰어납니다.",
+                desc: "리버랜드 삼면강 유역의 비옥한 평야를 다스립니다. 지리적 요충지에 위치하여 사방이 뚫려있어 역사적으로 수많은 전란을 겪었으며 외교력이 뛰어깝니다.",
                 leader: "호스터 툴리 (Hoster Tully)", leaderDesc: "리버런의 영주. 가문의 영속을 위해 결혼 동맹 체계를 확립시킨 정치적이고 노련한 가문의 수장입니다."
             },
             Arryn: {
@@ -274,7 +292,7 @@
             },
             Greyjoy: {
                 type: "강철 군도 대가문", title: "그레이조이 가문 (House Greyjoy)", motto: "\"우리는 씨를 뿌리지 않는다 (We Do Not Sow)\"",
-                desc: "척박한 강철 군도 섬들을 다스리는 해양 강자 가문입니다. 강력한 강철 함대를 보유하여 바다를 무대로 약탈และ 해상 전투에 최적화된 독자적인 문화를 유지합니다.",
+                desc: "척박한 강철 군도 섬들을 다스리는 해양 강자 가문입니다. 강력한 강철 함대를 보유하여 바다를 무대로 약탈 및 해상 전투에 최적화된 독자적인 문화를 유지합니다.",
                 leader: "발론 그레이조이 (Balon Greyjoy)", leaderDesc: "파이크의 영주. 고대 방식의 가치관을 고수하며 철왕좌에 대항해 독립적인 반란을 수차례 주도했던 고집스럽고 냉혹한 선장입니다."
             },
             Lannister: {
@@ -295,7 +313,7 @@
             Tyrell: {
                 type: "남부(리치) 대가문", title: "티렐 가문 (House Tyrell)", motto: "\"강성하게 자라나라 (Growing Strong)\"",
                 desc: "남부(리치) 지방의 비옥한 곡창 지대를 관할합니다. 풍요로운 식량 배급권과 대륙 최대 규모의 군사 인구수를 자랑하며 화려한 기사단 문화를 발전시켰습니다.",
-                leader: "마르제리 티렐 (Margaery Tyrell)", leaderDesc: "티렐 가문의 영애. 빼어난 미모와 뛰어난 정치적 두뇌, 대중을 사로잡는 영리한 사교술로 가문을 중앙 정치 중심으로 이끕니다."
+                leader: "마저리 티렐 (Margaery Tyrell)", leaderDesc: "티렐 가문의 영애. 빼어난 미모와 뛰어난 정치적 두뇌, 대중을 사로잡는 영리한 사교술로 가문을 중앙 정치 중심으로 이끄는 매혹적인 야심가입니다."
             },
             Martell: {
                 type: "도르네 대가문", title: "마르텔 가문 (House Martell)", motto: "\"굴하지 않고, 꺾이지 않으며, 깨어지지 않는다\"",
@@ -303,27 +321,153 @@
                 leader: "오베린 마르텔 (Oberyn Martell)", leaderDesc: "'붉은 독사'라 불리는 최고의 창술 무술가. 치명적인 독을 다루며 가문의 원수인 라니스터 가문에 피의 복수를 계획하는 인물입니다."
             },
 
-            // --- 봉신 가문 및 기타 세력 데이터 ---
-            Mormont: { type: "북부 봉신", title: "모르몬트 가문", motto: "\"우리는 서 있다\"", desc: "북부 곰 섬의 영주. 거친 환경 속에서 남녀 가릴 것 없이 도끼를 들고 싸우는 강인한 전투 가문입니다.", leader: "제오르 모르몬트", leaderDesc: "밤의 경비대 총사령관으로 취임하여 장벽을 수호 중입니다." },
-            Karstark: { type: "북부 봉신", title: "카스타크 가문", motto: "\"겨울의 태양\"", desc: "카홀드의 영주. 스타크 가문의 친족 방계 혈통 가문입니다.", leader: "릭카드 카스타크", leaderDesc: "스타크 가문의 군사 행동에 핵심 전력을 지원합니다." },
-            Bolton: { type: "북부 봉신", title: "볼튼 가문", motto: "\"우리 칼날은 날카롭다\"", desc: "드레드포트의 영주. 스타크의 틈을 노리는 기회주의적 가문입니다.", leader: "루스 볼튼", leaderDesc: "가문의 권력을 위해 물밑에서 엄청난 야심을 설계 중입니다." },
-            Mallister: { type: "리버랜드 봉신", title: "말리스터 가문", motto: "\"바다를 경계하라\"", desc: "시가드의 영주 가문으로 강철 군도 약탈자들의 침략을 서쪽 해안선 최전방에서 막아냅니다.", leader: "제이슨 말리스터", leaderDesc: "리버랜드의 노련한 명장이자 기사입니다." },
-            Blackwood: { type: "리버랜드 봉신", title: "블랙우드 가문", motto: "공식 표어 없음", desc: "리버랜드에서 유일하게 고대 신을 섬기며 이웃 브라켄 가문과 수천 년간 반목해 왔습니다.", leader: "티토스 블랙우드", leaderDesc: "기개 높고 충성심 강한 영주입니다." },
-            Frey: { type: "리버랜드 봉신", title: "프레이 가문", motto: "\"우리가 길을 가로막는다\"", desc: "그린포크 강의 요충지 '쌍둥이 성'의 주인. 비열한 성정으로 멸시받습니다.", leader: "왈더 프레이", leaderDesc: "90대의 기회주의자 영주입니다." },
-            Royce: { type: "동부(베일) 봉신", title: "로이스 가문", motto: "\"우리는 기억한다\"", desc: "베일 내 최고의 세력과 고대 청동 갑옷 전통을 지닌 가문입니다.", leader: "요한 로이스", leaderDesc: "아린 가문의 섭정단 중 가장 강력한 발언권을 행사합니다." },
-            Waynwood: { type: "동부(베일) 봉신", title: "웨인우드 가문", motto: "\"남는 것은 신의뿐\"", desc: "아이언우드 성의 영주 가문으로 의리와 예법을 극도로 중요시합니다.", leader: "안야 웨인우드", leaderDesc: "고결한 기사적 가치관을 대변하는 여영주입니다." },
-            Harlaw: { type: "강철군도 봉신", title: "할로우 가문", motto: "\"밤은 칼날이다\"", desc: "강철 군도 내에서 가장 비옥한 섬과 거대한 인구를 확보한 경제적 강가입니다.", leader: "로드릭 할로우", leaderDesc: "이성적인 판단을 내리는 지략가입니다." },
-            Drumm: { type: "강철군도 봉신", title: "드럼 가문", motto: "공식 표어 없음", desc: "고대 발리리아 강철검인 '붉은 비'를 소유한 유서 깊은 무가입니다.", leader: "던스탄 드럼", leaderDesc: "전통적인 강철인들의 권리를 강하게 주장하는 영주입니다." },
-            Crakehall: { type: "서부 봉신", title: "크레이크홀 가문", motto: "\"우리만큼 강한 자는 없다\"", desc: "라니스터 군대의 상징적인 돌격대 역할을 맡는 맹장 가문입니다.", leader: "롤랜드 크레이크홀", leaderDesc: "최전방 돌격 명령을 전담하는 신뢰받는 야전 기사입니다." },
-            Marbrand: { type: "서부 봉신", title: "마르브랜드 가문", motto: "\"길을 밝히다\"", desc: "라니스터 가문과 오랜 혈연관계로 묶여 있어 충성도가 가장 높습니다.", leader: "아담 마르브랜드", leaderDesc: "라니스터의 직속 전초대장으로 대활약하는 장수입니다." },
-            Clegane: { type: "서부 봉신", title: "클레가인 가문", motto: "표어 없음", desc: "라니스터 가문에 목숨 바쳐 충성하며 생긴 신생 공포 무가입니다.", leader: "그레고르 클레가인", leaderDesc: "'거산'이라는 이명을 가진 최강의 인간 병기입니다." },
-            Dragonstone: { type: "국왕령 특수영지", title: "드래곤스톤 영지", motto: "\"철왕좌의 정당한 후계 영지\"", desc: "국왕령에 종속된 특수 도서 영지로 과거 타르가르옌 왕세자들의 요새였습니다.", leader: "스타니스 바라테온", leaderDesc: "타협을 모르는 철저한 원칙주의자이며 군사 전술의 대가입니다." },
+            // --- 북부 봉신 가문 (상세화) ---
+            Mormont: { 
+                type: "북부 봉신", title: "모르몬트 가문 (House Mormont)", motto: "\"우리는 서 있다\"", 
+                desc: "척박한 북부 곰 섬의 영주. 영지 사정상 남녀를 가리지 않고 도끼를 들고 정예 전사로 훈련받으며, 대대로 스타크 가문에 절대적이고 맹목적인 충성심을 바쳐 온 신의의 가문입니다.", 
+                leader: "제오르 모르몬트 (Jeor Mormont)", 
+                leaderDesc: "가문의 영주직을 아들에게 물려주고 스스로 장벽으로 향한 장부입니다. 강인한 체구와 엄격한 통솔력을 바탕으로 밤의 경비대를 지휘하는 총사령관(Lord Commander)으로 활약하고 있습니다." 
+            },
+            Karstark: { 
+                type: "북부 봉신", title: "카스타크 가문 (House Karstark)", motto: "\"겨울의 태양\"", 
+                desc: "카홀드의 지배자. 수천 년 전 스타크 가문에서 갈라져 나온 방계 친족 혈통으로, 북부에서 스타크 다음가는 거대한 군사 동원력을 자랑하는 핵심 전력 무가입니다.", 
+                leader: "릭카드 카스타크 (Rickard Karstark)", 
+                leaderDesc: "거친 턱수염을 기른 전형적이고 고집스러운 북부의 전사입니다. 가문의 명예와 피의 복수를 절대로 잊지 않는 냉혹하고 불같은 성정을 지닌 영주입니다." 
+            },
+            Bolton: { 
+                type: "북부 봉신", title: "볼튼 가문 (House Bolton)", motto: "\"우리 칼날은 날카롭다\"", 
+                desc: "드레드포트의 영주. 과거 북부의 패권을 두고 스타크 가문과 수백 년간 전쟁을 벌였던 숙적입니다. 포로의 가죽을 산 채로 벗기는 인피 박리(Flaying) 전통을 숨겨둔 잔혹한 가문입니다.", 
+                leader: "루스 볼튼 (Roose Bolton)", 
+                leaderDesc: "얼음처럼 차가운 창백한 눈동자를 지녔으며 목소리가 속삭이듯 낮고 조용합니다. 감정을 전혀 내비치지 않은 채 뒤에서 가문의 이익을 위해 철저하게 배신을 계산하는 섬뜩한 기회주의자입니다." 
+            },
+
+            // --- 리버랜드 봉신 가문 (상세화) ---
+            Mallister: { 
+                type: "리버랜드 봉신", title: "말리스터 가문 (House Mallister)", motto: "\"바다를 경계하라\"", 
+                desc: "서쪽 해안가 시가드 성의 주인. 강철 군도 약탈자들의 오랜 침략 역사를 온몸으로 받아내며 해안 방파제 역할을 해왔기에, 해상 방어 기사단 능력이 타의 추종을 불허합니다.", 
+                leader: "제이슨 말리스터 (Jason Mallister)", 
+                leaderDesc: "과거 강철 군도의 반란 당시 적의 왕자를 일대일 결투로 베어 넘겨 전설이 된 백전노장 기사입니다. 풍부한 야전 경험과 깊은 품격을 지닌 리버랜드의 명장입니다." 
+            },
+            Blackwood: { 
+                type: "리버랜드 봉신", title: "블랙우드 가문 (House Blackwood)", motto: "공식 표어 없음", 
+                desc: "레이븐트리 홀의 영주. 남부 세력권에서 예외적으로 안달족의 칠신교가 아닌 고대 신과 위어우드를 섬기며, 앙숙인 브라켄 가문과 수천 년간 피의 복수를 주고받은 전통의 무가입니다.", 
+                leader: "티토스 블랙우드 (Tytos Blackwood)", 
+                leaderDesc: "진짜 까마귀 깃털로 짠 거대한 망토를 두르고 전장에 서는 인물입니다. 자존심이 매우 강하고 활을 잘 쏘며, 스타크와 툴리 가문에 대한 의리를 끝까지 지키는 기개 높은 영주입니다." 
+            },
+            Frey: { 
+                type: "리버랜드 봉신", title: "프레이 가문 (House Frey)", motto: "\"우리가 길을 가로막는다\"", 
+                desc: "그린포크 강의 요충지 '쌍둥이 성'의 군주. 통행세를 징수하며 대가문 급의 엄청난 재력과 군사력을 모았으나, 전통 귀족들로부터 천박하고 신용할 수 없는 집단이라며 멸시를 받아왔습니다.", 
+                leader: "왈더 프레이 (Walder Frey)", 
+                leaderDesc: "90세가 넘은 나이에도 수많은 처첩을 거느리며 수십 명의 자손을 낳은 노회한 인물입니다. 자신을 무시한 대가문들에게 앙심을 품고 있으며, 가문의 이익과 자존심을 위해서라면 신의와 예법을 가차 없이 짓밟을 수 있는 음험하고 비열한 영주입니다." 
+            },
+
+            // --- 동부(베일) 봉신 가문 (지정 가문 및 상세화) ---
+            Royce: {
+                type: "동부(베일) 봉신", title: "로이스 가문 (House Royce)", motto: "\"우리는 기억한다\"",
+                desc: "룬스톤의 영주 가문. 베일 지역 내에서 대가문인 아린 가문 다음가는 압도적인 세력과 군사력을 지녔으며, 고대 퍼스트 맨의 마법 문양이 새겨진 청동 갑옷을 대대로 물려받는 유서 깊은 강가입니다.",
+                leader: "욘 로이스 (Yohn Royce)",
+                leaderDesc: "'청동 욘'이라 불리는 거구의 원로 전사입니다. 기사도 정신의 화신이자 뛰어난 마술사들과 기사단을 호령하는 인물로, 굳건한 풍채만큼이나 의리와 정통성을 중시하는 묵직한 영주입니다."
+            },
+            Corbray: {
+                type: "동부(베일) 봉신", title: "코브레이 가문 (House Corbray)", motto: "\"하늘이 우리의 가이드\"",
+                desc: "하트 홈의 군주. 가문의 보물로 발리리아 강철검인 '외로운 부인(Lady Forlorn)'을 소유하고 있으며, 대대로 호전적이고 날카로운 검술 장수들을 다수 배출한 베일의 유력 무가입니다.",
+                leader: "라이오넬 코브레이 (Lyonel Corbray)",
+                leaderDesc: "가문의 수장으로서 다소 다혈질적이고 공격적인 성향을 지닌 전형적인 야전 지휘관입니다. 명예보다는 실리적인 칼날의 가치를 믿으며 전투에서 선봉에 서길 즐기는 돌격형 인물입니다."
+            },
+            Baelish: {
+                type: "동부(베일) 봉신", title: "베일리쉬 가문 (House Baelish)", motto: "\"지식은 힘이다 (원래 흉내지빠귀)\"",
+                desc: "베일의 가장 보잘것없고 척박한 해안가 '핑거스' 영지에서 출발한 최하급 신생 귀족 가문입니다. 군사력은 제로에 가깝지만, 오직 지독한 천재성과 간계로 가문의 위상을 철왕좌 핵심부까지 끌어올렸습니다.",
+                leader: "피터 베일리쉬 (Petyr Baelish)",
+                leaderDesc: "'리틀핑거'라는 멸칭이자 이명을 지닌 대륙 최고의 모략가입니다. 현재 철왕좌의 재무관으로 활동하며 돈줄을 통제하고 있으며, 겉으로는 누구에게나 부드럽게 웃어주지만 뒤에서는 왕국 전체를 거대한 혼돈의 도가니로 몰아넣는 소름 돋는 지략가입니다."
+            },
+
+            // --- 강철군도 봉신 가문 (지정 가문 및 상세화) ---
+            Harlaw: {
+                type: "강철군도 봉신", title: "할로우 가문 (House Harlaw)", motto: "\"밤은 칼날이다\"",
+                desc: "할로우 섬의 지배자. 강철 군도 전체에서 가장 비옥한 영지와 최대 규모의 인구 및 무역항을 보유하고 있어, 경제력과 실질적 군사 동원력 면에서는 대가문인 그레이조이를 능가하는 2인자 세력입니다.",
+                leader: "로드릭 할로우 (Rodrik Harlaw)",
+                leaderDesc: "약탈과 파괴만을 숭상하는 무식한 강철인들 중에서 유일하게 거대한 도서관을 짓고 밤새 책을 읽어 '책벌레(The Reader)'라 불리는 이성적인 현자입니다. 냉철한 현실 감각으로 무모한 반란을 만류하는 지혜로운 지도자입니다."
+            },
+            Botley: {
+                type: "강철군도 봉신", title: "보틀리 가문 (House Botley)", motto: "공식 표어 없음",
+                desc: "대가문이 위치한 파이크 섬의 주요 항구인 로드포트를 영지로 둔 가문입니다. 어업과 무역, 조선술을 통해 군도 내부의 물류 흐름을 통제하며 대가문을 가장 근거리에서 보좌하는 핵심 행정·해군 봉신입니다.",
+                leader: "트리스토퍼 보틀리 (Tristifer Botley)",
+                leaderDesc: "젊고 민첩한 기질을 지닌 해상 전사입니다. 그레이조이 가문의 후계자들과 어린 시절을 함께 보내며 연정을 키우거나 깊은 유대 관계를 맺어 가문의 외교적 완충재 역할을 하는 충직한 청년입니다."
+            },
+
+            // --- 서부(웨스터랜드) 봉신 가문 (지정 가문 및 상세화) ---
+            Westerling: {
+                type: "서부 봉신", title: "웨스털링 가문 (House Westerling)", motto: "\"명예와 충성\"",
+                desc: "크랙 성의 영주. 과거에는 서부의 강력한 선왕 계열 가문이었으나, 금광이 고갈되면서 현재는 가세가 크게 기울어 명예와 오래된 가문 타이틀 신용도만을 간신히 유지하고 있는 몰락 귀족 가문입니다.",
+                leader: "가웨인 웨스털링 (Gawen Westerling)",
+                leaderDesc: "자존심은 강하지만 가문을 다시 일으켜 세울 자금이 부족해 늘 고뇌하는 전형적인 전통 귀족입니다. 라니스터의 기세에 눌려 있으면서도 가문의 유서 깊은 예법을 목숨처럼 아낍니다."
+            },
+            Payne: {
+                type: "서부 봉신", title: "페인 가문 (House Payne)", motto: "공식 표어 없음",
+                desc: "라니스터 가문을 대대로 보좌해 온 충직한 기사 가문입니다. 뛰어난 검술가나 왕실 행정관들을 배출하였으며, 라니스터가 하달하는 어두운 비밀이나 처형 집행 임무를 묵묵히 수행하는 그림자 같은 세력입니다.",
+                leader: "일린 페인 (Ilyn Payne)",
+                leaderDesc: "과거 미친 왕에게 설설 기던 왕실에서 '실질적 지배자는 타이윈 라니스터'라고 말해 혀가 잘린 국왕의 사형 집행인(Justice)입니다. 거대한 사형 집행검을 들고 해골 같은 얼굴로 아무 말 없이 서 있어 보기만 해도 공포를 주는 인물입니다."
+            },
+            Clegane: {
+                type: "서부 봉신", title: "클리게인 가문 (House Clegane)", motto: "표어 없음 (세 마리의 사냥개)",
+                desc: "타이윈 라니스터의 아버지를 사냥개 무리로 구출해 내며 기사 작위를 받은 신생 무가입니다. 오직 잔혹한 무력과 무조건적인 충성 맹세로 라니스터의 더러운 살인·방화 대행 업무를 전담하는 잔인한 가문입니다.",
+                leader: "그레고르 클리게인 (Gregor Clegane)",
+                leaderDesc: "'거산(The Mountain)'이라 불리는 2미터가 훌륭히 넘는 대륙 최악의 괴물 전사입니다. 엄청난 거구를 대검 하나로 휘두르며 자비 없이 민간인을 학살하고 고문하는 잔혹무도한 성정을 지녀, 서부의 가장 무시무시한 인간 병기로 통합니다."
+            },
+
+            // --- 국왕령 특수 영지 및 봉신 ---
+            Dragonstone: { type: "국왕령 특수영지", title: "드래곤스톤 영지", motto: "\"철왕좌의 정당한 후계 영지\"", desc: "국왕령에 종속된 특수 도서 요새로 과거 타르가르옌 왕세자들이 다스리던 왕가 직속의 영지입니다.", leader: "스타니스 바라테온", leaderDesc: "타협을 모르는 철저한 원칙주의자이며 군사 전술의 대가입니다." },
             Velaryon: { type: "국왕령 봉신", title: "벨라리온 가문", motto: "\"오래된 전설, 진실된 혈통\"", desc: "왕국 조선술과 왕실 해군 함대의 사령관직을 독점하는 해상 강자입니다.", leader: "코를리스 벨라리온", leaderDesc: "역사상 가장 위대한 전설적인 제독입니다." },
-            Tarth: { type: "스톰랜드 봉신", title: "타스 가문", motto: "공식 표어 없음", desc: "사파이어 섬의 지배자 가문으로 바라테온 가문에 충성합니다.", leader: "브리엔 타스", leaderDesc: "기사를 뛰어넘는 무력과 신의를 지닌 거구의 여전사입니다." },
-            Dondarrion: { type: "스톰랜드 봉신", title: "돈다리온 가문", motto: "\"벼락을 조심하라\"", desc: "블랙하벤의 요새 영주 가문으로 남쪽 도르네 습격자들을 최전선에서 막아냅니다.", leader: "베릭 돈다리온", leaderDesc: "죽음을 넘나들며 전설적인 행보를 걷는 의적단 수장입니다." },
-            Tarly: { type: "남부(리치) 봉신", title: "탈리 가문", motto: "\"첫 전선에 우리가 선다\"", desc: "리치 지방 최고의 호전성과 군사 훈련도를 갖춘 핵심 무가 가문입니다.", leader: "랜딜 탈리", leaderDesc: "대륙 최고의 야전 전술가이자 야전 사령관입니다." },
-            Hightower: { type: "남부(리치) 봉신", title: "하이타워 가문", motto: "\"우리가 길을 밝힌다\"", desc: "대도시 '올드타운'과 지식 전당인 '마이스터 시타델'을 수호합니다.", leader: "레이턴 하이타워", leaderDesc: "도시의 거대한 무역 경제와 방어를 통제하는 수장입니다." },
-            Dayne: { type: "도르네 봉신", title: "데이인 가문", motto: "공식 표어 없음", desc: "전설의 대검 '새벽(Dawn)'을 소유하고 있으며 '아침의 검' 칭호를 씁니다.", leader: "아서 데이인", leaderDesc: "킹스가드의 핵심으로서 기사도의 화신으로 불렸던 전설입니다." },
+
+            // --- 스톰랜드 봉신 가문 (지정 가문 및 상세화) ---
+            Tarth: {
+                type: "스톰랜드 봉신", title: "타스 가문 (House Tarth)", motto: "공식 표어 없음",
+                desc: "아름다운 이븐폴 홀과 사파이어 섬을 다스리는 가문입니다. 청청한 바다의 무역을 통제하며 대가문인 바라테온 가문이 위기에 처할 때마다 굳건하게 방패가 되어 준 신뢰의 영지입니다.",
+                leader: "브리엔느 타스 (Brienne of Tarth)",
+                leaderDesc: "가문의 유일한 후계 영애이지만, 드레스를 입는 대신 거대한 갑옷을 입고 칼을 쥔 거구의 여전사입니다. 기사 자격은 없으나 그 어떤 남성 기사보다 고결한 기사도 정신과 우직한 서약 정신을 지닌 신의의 화신입니다."
+            },
+            Swann: {
+                type: "스톰랜드 봉신", title: "스완 가문 (House Swann)", motto: "\"조심스럽고 강력하게\"",
+                desc: "스톤헬름의 군주. 스톰랜드에서 두 번째로 강력하고 부유한 가문으로 마찰 지역인 도르네 접경지 계곡을 수호하며, 정치적 중립을 영리하게 지키면서 기사단의 순수한 전투력을 극한으로 연마한 무가입니다.",
+                leader: "발론 스완 (Balon Swann)",
+                leaderDesc: "전투도끼, 무거운 대창, 검을 자유자재로 다루며 마상 창시합에서 늘 우승 후보로 꼽히는 청렴하고 용맹한 일류 기사입니다. 명예와 기사적 품위를 가장 소중히 여기는 정의로운 인물입니다."
+            },
+            Seaworth: {
+                type: "스톰랜드 봉신", title: "시워스 가문 (House Seaworth)", motto: "표어 없음 (밀수선과 양파)",
+                desc: "로버트의 반란 시절 포위당해 굶어 죽어가던 스톰즈 엔드 성에 밀선으로 양파와 생선을 보급해 왕국을 구하며 기사 작위를 받은 신생 영지 가문입니다. 뼈대 깊은 귀족들에게는 은근한 무시를 당합니다.",
+                leader: "다보스 시워스 (Davos Seaworth)",
+                leaderDesc: "'양파 기사'라는 별명을 가진 과거 악명 높은 밀수꾼 출신 기사입니다. 밀수 죄값으로 손가락 마디가 잘렸으나 이를 목걸이로 걸고 다니며, 왕족들에게 유일하게 아첨하지 않고 진실된 충언과 헌신을 쏟아붓는 대륙 제일의 양심적 참모입니다."
+            },
+
+            // --- 남부(리치) 봉신 가문 (지정 가문 및 상세화) ---
+            Tarly: {
+                type: "남부(리치) 봉신", title: "탈리 가문 (House Tarly)", motto: "\"첫 전선에 우리가 선다 (First in Battle)\"",
+                desc: "혼 힐의 영주 가문. 리치 지방 전체에서 가장 호전적이고 군사 훈련도가 완벽한 정예 육군 기사단을 보유하고 있으며, 가문의 가보로 발리리아 강철 대검 '하트베인'을 소유한 서슬 퍼런 무가입니다.",
+                leader: "랜딜 탈리 (Randyll Tarly)",
+                leaderDesc: "과거 로버트 바라테온의 전승 행진을 유일하게 야전에서 대파해 꺾어버린 대륙 최고의 명장입니다. 군인 정신이 투철하나, 자식에게도 자비가 없고 나약함을 절대 용납하지 않는 무섭고 엄격한 철혈 영주입니다."
+            },
+            Redwyne: {
+                type: "남부(리치) 봉신", title: "레드와인 가문 (House Redwyne)", motto: "\"과즙으로 달콤하게, 전투로 시큼하게\"",
+                desc: "아버 보르 섬의 주인. 칠왕국 최고급 포도주 유통권을 쥐고 있어 재력이 어마어마하며, 무엇보다 티렐 가문 군사력의 핵심축인 '아버 함대(대형 전함 200척 이상)'를 소유한 막강한 해상 세력입니다.",
+                leader: "팍스터 레드와인 (Paxter Redwyne)",
+                leaderDesc: "바다의 무역 생태계를 완벽히 장악하고 있는 영민한 제독이자 영주입니다. 티렐 가문과 겹사돈으로 묶여 있어 남부 연합군의 해상 보급과 상권 방어를 책임지는 거물 정치가입니다."
+            },
+            Hightower: {
+                type: "남부(리치) 봉신", title: "하이타워 가문 (House Hightower)", motto: "\"우리가 길을 밝힌다\"",
+                desc: "대도시 올드타운의 지배자. 왕국에서 가장 높은 상징탑인 '하이타워'를 기점으로 마이스터 대학사들의 총본산 시타델을 후원하며, 대가문 급의 대규모 군대와 역사를 간직한 최고 품격의 대귀족 가문입니다.",
+                leader: "제럴드 하이타워 (Gerold Hightower)",
+                leaderDesc: "'하얀 황소(White Bull)'라는 별명을 지닌 전설적인 전임 킹스가드 기사단장입니다. 바위 같은 체구와 흔들리지 않는 충성심으로 타르가르옌 왕가를 보좌했던 기사들의 진정한 대선배이자 우상 같은 인물입니다."
+            },
+
+            // --- 도르네 봉신 가문 (지정 가문 및 상세화) ---
+            Dayne: {
+                type: "도르네 봉신", title: "데인 가문 (House Dayne)", motto: "공식 표어 없음",
+                desc: "스타폴의 영주 가문. 우주에서 떨어진 별의 파편(운석)을 제련해 만든 유일무이한 백색 대검 '새벽(Dawn)'을 보관하고 있으며, 가문 내 최고의 실력자에게만 '아침의 검'이라는 명예 호칭과 함께 대검을 인계하는 무술의 명가입니다.",
+                leader: "아서 데인 (Arthur Dayne)",
+                leaderDesc: "'아침의 검' 왕실 친위대 기사. 쌍검과 대검을 마법처럼 휘두르며 에다드 스타크를 포함한 북부 최고의 전사 7명을 홀로 압도했던 대륙 역사상 적수가 없는 최강의 무신이자, 기사도의 최고 존엄입니다."
+            },
+
+            // --- 장벽 특수 독립 세력 ---
             NightWatch: { type: "특수 군단", title: "밤의 경비대", motto: "\"내 초소는 장벽이며, 나는 어둠을 밝히는 불꽃이다\"", desc: "최북단의 고대 거대 건축물 '장벽'을 영구히 수호하는 독립 군사 집단입니다.", leader: "존 스노우", leaderDesc: "다가올 겨울의 진정한 위협에 대비해 장벽을 사수하는 지휘관입니다." },
             BeyondWall: { type: "독립 세력", title: "장벽 너머 (와일들링)", motto: "\"우리는 무릎 꿇지 않는 자유민\"", desc: "최북단 혹독한 동토 지대에 살아가는 부족 연합체로 왕권 체제를 전면 거부합니다.", leader: "만스 레이더", leaderDesc: "수십 개의 와일들링 부족들을 하나로 통합해낸 위대한 지도자입니다." }
         };
@@ -348,7 +492,7 @@
             typeEl.innerText = data.type;
             
             // 배지 색상 동적 변경
-            if (key === 'KingsLanding') {
+            if (key === 'KingsLanding' || key === 'Kingsguard') {
                 typeEl.className = "text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wide bg-amber-500 text-slate-950 border border-amber-400 font-black";
             } else if (data.type.includes("대가문") || data.type.includes("왕가")) {
                 typeEl.className = "text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wide bg-amber-950/80 text-amber-400 border border-amber-800";
@@ -367,7 +511,7 @@
             // 3. 하단 시스템 로그 갱신
             const consoleLog = document.getElementById('console-log');
             const timestamp = new Date().toLocaleTimeString();
-            consoleLog.innerHTML = `> [${timestamp}] 계층 선택: [${data.title}]<br>> 노드 맵 데이터 바인딩 완료.`;
+            consoleLog.innerHTML = `> [${timestamp}] 계층 선택: [${data.title}]<br>> 지정 봉신 및 심화 고증 데이터 로딩 완료.`;
         }
     </script>
 </body>
